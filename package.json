@@ -1,0 +1,25 @@
+{
+	"name": "medikeeper-app",
+	"version": "1.0.0",
+	"description": "App for MediKeeper technical assessment.",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon server",
+		"start": "node server",
+		"build": "cd react-ui/ && npm install && npm run build"
+	},
+	"author": "Matthew Hughes",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"mongoose": "^5.10.5"
+	},
+	"cacheDirectories": [
+		"node_modules",
+		"client/node_modules"
+	],
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	}
+}
