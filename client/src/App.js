@@ -1,5 +1,6 @@
 import React from 'react';
-import Dashboard from './Dashboard';
+import AppRouter from './components/AppRouter';
+import Navbar from './components/Navbar';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -11,7 +12,8 @@ function App() {
 			className="App"
 			style={{ minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}
 		>
-			<Dashboard />
+			<Navbar />
+			<AppRouter />
 		</div>
 	);
 }

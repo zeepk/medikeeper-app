@@ -116,8 +116,9 @@ const Dashboard = () => {
 							.then((response) => response.json())
 							.then((res) => {
 								item.edited = false;
-								updateItems([...items]);
-								getItems();
+								updateItems([
+									...items.filter((arrayItem) => arrayItem._id !== item._id),
+								]);
 							});
 					}}
 				/>
@@ -168,7 +169,7 @@ const Dashboard = () => {
 						locale="en-US"
 					/>
 				</div>
-				<Button type="button" label="Add Item" type="submit" />
+				<Button label="Add Item" type="submit" />
 			</form>
 			{loading ? (
 				<ProgressSpinner

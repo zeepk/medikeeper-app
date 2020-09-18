@@ -14,9 +14,7 @@ router.get('/', async (req, res) => {
 
 // create one item
 router.post('/', async (req, res) => {
-	res.status(201).json(req.body);
 	const items = await Item.find().sort({ id: -1 }).limit(1);
-	console.log(items[0]);
 	const item = new Item({
 		id: +items[0].id + 1,
 		name: req.body.name,
