@@ -28,7 +28,7 @@ const Navbar = () => {
 					position: 'absolute',
 					top: 14,
 					fontSize: '1.5rem',
-					color: 'black',
+					color: 'white',
 				}}
 			>
 				MediApp
@@ -39,8 +39,10 @@ const Navbar = () => {
 		<div>
 			<Menubar
 				style={{
-					backgroundColor: '#a8c1c6',
+					backgroundColor: '#313131',
 					fontWeight: 'bold',
+					border: 'none',
+					borderRadius: 0,
 				}}
 				model={items}
 				start={start}

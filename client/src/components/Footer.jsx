@@ -13,8 +13,7 @@ const Footer = () => {
 			className="p-grid"
 			style={{
 				textAlign: 'left',
-				backgroundColor: '#b3b3b3',
-				color: 'black',
+				backgroundColor: '#6b6b6b',
 				margin: 0,
 				padding: '0 5vw 2vh 5vw',
 				fontSize: '.9rem',
@@ -28,7 +27,7 @@ const Footer = () => {
 					<a
 						href={footerItem.link}
 						className="footer-link"
-						style={{ color: 'black' }}
+						style={{ color: 'white' }}
 					>
 						{footerItem.name}
 					</a>

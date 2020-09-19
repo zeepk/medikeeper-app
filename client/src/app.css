@@ -9,3 +9,17 @@
 td {
 	padding: 20px 15px 20px 5px !important;
 }
+.p-menubar-button {
+	margin: 0 0 0 auto;
+}
+.p-menuitem-text,
+.p-menuitem-icon {
+	color: white !important;
+}
+.p-menubar-root-list,
+.p-menuitem-link {
+	background: #313131 !important;
+}
+.p-menuitem-link:hover {
+	background: #6e7073 !important;
+}

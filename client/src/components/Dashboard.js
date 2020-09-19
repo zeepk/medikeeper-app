@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import MaxPrices from './MaxPrices';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
+import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 const buttonSize = '40px';
@@ -139,7 +140,9 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div style={{ padding: '5vh 5vw 5vh 5vw', margin: '0 0 10vh 0' }}>
+		<div style={{ padding: '5vh 5vw 5vh 5vw', margin: 0 }}>
+			<MaxPrices data={items} />
+
 			<form
 				className="p-formgroup-inline"
 				onSubmit={(e) => {
@@ -194,7 +197,11 @@ const Dashboard = () => {
 					}}
 				/>
 			) : (
-				<DataTable value={items} rowHover style={{ maxWidth: '700px' }}>
+				<DataTable
+					value={items}
+					rowHover
+					style={{ maxWidth: '700px', marginBottom: '20vh' }}
+				>
 					<Column
 						header="Name"
 						sortable
@@ -212,7 +219,6 @@ const Dashboard = () => {
 					<Column
 						header=""
 						body={actionsTemplate}
-						style={{ textAlign: 'right' }}
 						style={{ width: '200px', maxWidth: '30vw' }}
 					/>
 				</DataTable>

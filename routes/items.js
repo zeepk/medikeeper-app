@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// get all records for all items
+// returns a list of max prices of items grouped by item name
 router.get('/maxprices', async (req, res) => {
 	try {
 		const items = await Item.find();
@@ -27,6 +27,26 @@ router.get('/maxprices', async (req, res) => {
 					: prices[items[item].name];
 		}
 		res.json(prices);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+});
+
+// takes an item name and returns the max price for it
+router.get('/maxitemprice/:name', async (req, res) => {
+	const name = req.params.name;
+	try {
+		const items = await Item.find();
+		let maxPrice = 0;
+		const filteredItems = items.filter((item) => item.name === name);
+		for (const item in filteredItems) {
+			console.log(filteredItems[item]);
+			maxPrice =
+				filteredItems[item].cost > maxPrice
+					? filteredItems[item].cost
+					: maxPrice;
+		}
+		res.json(maxPrice);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}
