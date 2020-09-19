@@ -29,6 +29,7 @@ const MaxPrices = (props) => {
 			<div className="p-grid" style={{ maxWidth: '700px' }}>
 				<div className="p-col-12 p-sm-6 p-md-3">
 					<InputText
+						placeholder="Enter a name"
 						value={name}
 						onChange={(e) => updateName(e.target.value)}
 					/>
