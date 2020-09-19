@@ -12,9 +12,6 @@ mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
-app.get('/*', function (req, res) {
-	res.sendFile('../client/build/index.html');
-});
 app.use('*', express.static('../client/build'));
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
