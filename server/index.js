@@ -18,7 +18,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 const itemsRouter = require('../routes/items');
 app.use('/api/items', itemsRouter);
 app.get('*', (req, res) =>
-	res.sendFile(path.resolve('../client/build', 'index.html'))
+	res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
 );
 // app.get('*', function (response) {
 // 	response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
