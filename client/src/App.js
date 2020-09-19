@@ -1,6 +1,7 @@
 import React from 'react';
-import AppRouter from './components/AppRouter';
 import Navbar from './components/Navbar';
+import AppRouter from './components/AppRouter';
+import Footer from './components/Footer';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -10,10 +11,16 @@ function App() {
 	return (
 		<div
 			className="App"
-			style={{ minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}
+			style={{
+				position: 'relative',
+				minHeight: '100vh',
+				backgroundColor: 'var(--bg-color)',
+				paddingBottom: '10vh',
+			}}
 		>
 			<Navbar />
 			<AppRouter />
+			<Footer />
 		</div>
 	);
 }

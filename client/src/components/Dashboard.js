@@ -6,6 +6,8 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
+const buttonSize = '40px';
+
 const Dashboard = () => {
 	const [items, updateItems] = useState([]);
 	const [name, updateName] = useState('');
@@ -62,43 +64,48 @@ const Dashboard = () => {
 
 	const actionsTemplate = (rowData) => {
 		const item = items.find((item) => item._id === rowData._id);
+		item.save = () => {
+			item.loading = true;
+			updateItems([...items]);
+			fetch(`/api/items/${item._id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name: item.name,
+					cost: item.cost,
+				}),
+			})
+				.then((response) => response.json())
+				.then(() => {
+					item.loading = false;
+					item.edited = false;
+					updateItems([...items]);
+				});
+		};
 		return (
 			<span>
 				{item.loading ? (
 					<ProgressSpinner
 						strokeWidth={'5'}
-						style={{ height: '30px', margin: '0 -30px 0 0' }}
+						style={{
+							height: buttonSize,
+							width: buttonSize,
+							margin: '0 0 -5px 0',
+						}}
 					/>
 				) : (
 					<Button
-						icon="pi pi-check"
+						icon="pi pi-save"
 						className="p-button-rounded"
 						disabled={!item.edited}
-						onClick={() => {
-							item.loading = true;
-							updateItems([...items]);
-							fetch(`/api/items/${item._id}`, {
-								method: 'PUT',
-								headers: {
-									'Content-Type': 'application/json',
-								},
-								body: JSON.stringify({
-									name: item.name,
-									cost: item.cost,
-								}),
-							})
-								.then((response) => response.json())
-								.then((res) => {
-									item.loading = false;
-									item.edited = false;
-									updateItems([...items]);
-								});
-						}}
+						onClick={() => item.save()}
+						style={{ height: buttonSize, width: buttonSize }}
 					/>
 				)}
 
 				<Button
-					style={{ margin: '0 0 0 10px' }}
 					icon="pi pi-times"
 					className="p-button-rounded p-button-danger"
 					onClick={() => {
@@ -114,12 +121,17 @@ const Dashboard = () => {
 							}),
 						})
 							.then((response) => response.json())
-							.then((res) => {
+							.then(() => {
 								item.edited = false;
 								updateItems([
 									...items.filter((arrayItem) => arrayItem._id !== item._id),
 								]);
 							});
+					}}
+					style={{
+						height: buttonSize,
+						width: buttonSize,
+						margin: '0 0 0 10px',
 					}}
 				/>
 			</span>
@@ -127,7 +139,7 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div style={{ padding: '5vh 5vw' }}>
+		<div style={{ padding: '5vh 5vw 5vh 5vw', margin: '0 0 10vh 0' }}>
 			<form
 				className="p-formgroup-inline"
 				onSubmit={(e) => {
@@ -148,7 +160,6 @@ const Dashboard = () => {
 						})
 						.catch((err) => console.log(err))
 						.finally(() => {
-							console.log('done');
 							getItems();
 						});
 				}}
@@ -183,14 +194,14 @@ const Dashboard = () => {
 					}}
 				/>
 			) : (
-				<DataTable value={items} rowHover>
+				<DataTable value={items} rowHover style={{ maxWidth: '700px' }}>
 					<Column
 						header="Name"
 						sortable
 						filter
 						filterPlaceholder="Search by name"
 						body={nameTemplate}
-						style={{ width: '30vw' }}
+						style={{ width: '30vw', maxWidth: '300px' }}
 					/>
 					<Column
 						header="Cost"
@@ -202,6 +213,7 @@ const Dashboard = () => {
 						header=""
 						body={actionsTemplate}
 						style={{ textAlign: 'right' }}
+						style={{ width: '200px', maxWidth: '30vw' }}
 					/>
 				</DataTable>
 			)}

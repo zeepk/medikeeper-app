@@ -1,9 +1,11 @@
 :root {
 	--bg-color: #d7d7d7;
+	font-size: 16px;
 }
 .p-inputtext {
 	width: 100% !important;
+	border-color: #a6a6a6 !important;
 }
 td {
-	padding: 20px 5px !important;
+	padding: 20px 15px 20px 5px !important;
 }
