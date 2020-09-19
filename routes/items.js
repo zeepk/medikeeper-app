@@ -56,7 +56,7 @@ router.get('/maxitemprice/:name', async (req, res) => {
 router.post('/', async (req, res) => {
 	const items = await Item.find().sort({ id: -1 }).limit(1);
 	const item = new Item({
-		id: +items[0].id + 1,
+		id: items[0] ? +items[0].id + 1 : 1,
 		name: req.body.name,
 		cost: req.body.cost,
 		lastUpdated: Date.now(),
