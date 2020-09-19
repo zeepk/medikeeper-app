@@ -20,7 +20,6 @@ const Dashboard = () => {
 		fetch('/api/items')
 			.then((response) => response.json())
 			.then((res) => {
-				console.table(res);
 				updateItems(res);
 				updateLoading(true);
 			})

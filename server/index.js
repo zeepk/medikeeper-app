@@ -15,10 +15,6 @@ db.once('open', () => console.log('Connected to Database'));
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// app.get('/api', function (req, res) {
-// 	res.set('Content-Type', 'application/json');
-// 	res.send('{"message":"Hello from the custom server!"}');
-// });
 const itemsRouter = require('../routes/items');
 app.use('/api/items', itemsRouter);
 
