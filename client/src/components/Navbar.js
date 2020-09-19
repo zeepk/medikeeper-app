@@ -26,7 +26,7 @@ const Navbar = () => {
 			<span
 				style={{
 					position: 'absolute',
-					top: 12,
+					top: 14,
 					fontSize: '1.5rem',
 					color: 'black',
 				}}
@@ -37,7 +37,14 @@ const Navbar = () => {
 	);
 	return (
 		<div>
-			<Menubar model={items} start={start} />
+			<Menubar
+				style={{
+					backgroundColor: '#a8c1c6',
+					fontWeight: 'bold',
+				}}
+				model={items}
+				start={start}
+			/>
 		</div>
 	);
 };

@@ -12,6 +12,26 @@ router.get('/', async (req, res) => {
 	}
 });
 
+// get all records for all items
+router.get('/maxprices', async (req, res) => {
+	try {
+		const items = await Item.find();
+		const prices = {};
+		Array.from(new Set(items.map((item) => item.name))).map(
+			(name) => (prices[name] = 0)
+		);
+		for (const item in items) {
+			prices[items[item].name] =
+				prices[items[item].name] < items[item].cost
+					? items[item].cost
+					: prices[items[item].name];
+		}
+		res.json(prices);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+});
+
 // create one item
 router.post('/', async (req, res) => {
 	const items = await Item.find().sort({ id: -1 }).limit(1);
