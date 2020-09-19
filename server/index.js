@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-const dotenv = require('dotenv');
+
 dotenv.config({ path: './config/config.env' });
 app.use(express.json());
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
