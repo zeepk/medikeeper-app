@@ -12,7 +12,9 @@ const CustomRouter = () => {
 	return (
 		<div>
 			<Router>
-				<Switch>
+				<Route exact path="/" component={Dashboard} />
+				<Route exact path="/apitest" component={APITest} />
+				{/* <Switch>
 					<Route
 						exact
 						path="/"
@@ -26,7 +28,7 @@ const CustomRouter = () => {
 					<Route path="/apitest">
 						<APITest />
 					</Route>
-				</Switch>
+				</Switch> */}
 			</Router>
 		</div>
 	);
