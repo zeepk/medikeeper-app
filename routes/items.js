@@ -38,7 +38,9 @@ router.get('/maxitemprice/:name', async (req, res) => {
 	try {
 		const items = await Item.find();
 		let maxPrice = 0;
-		const filteredItems = items.filter((item) => item.name === name);
+		const filteredItems = items.filter(
+			(item) => item.name.toLowerCase() === name.toLowerCase()
+		);
 		for (const item in filteredItems) {
 			console.log(filteredItems[item]);
 			maxPrice =

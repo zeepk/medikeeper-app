@@ -18,12 +18,16 @@ const MaxPrices = (props) => {
 			<Dialog
 				header="Max Prices"
 				visible={visible}
-				style={{ width: '50vw' }}
+				style={{ maxWidth: '90vw', width: '800px' }}
 				onHide={() => updateVisible(false)}
 			>
 				<DataTable value={prices}>
 					<Column field="name" header="Name" />
-					<Column field="cost" header="Max Price" />
+					<Column
+						field="cost"
+						header="Max Price"
+						body={(rowData) => <div>{`$${rowData.cost}`}</div>}
+					/>
 				</DataTable>
 			</Dialog>
 			<div className="p-grid" style={{ maxWidth: '700px' }}>
@@ -41,7 +45,11 @@ const MaxPrices = (props) => {
 						label="Get Max Price"
 						type="submit"
 						onClick={() => {
-							if (!items.some((item) => item.name === name)) {
+							if (
+								!items.some(
+									(item) => item.name.toLowerCase() === name.toLowerCase()
+								)
+							) {
 								toast.show({
 									severity: 'error',
 									summary: `Cannot find ${name}`,
