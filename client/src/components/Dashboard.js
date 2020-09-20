@@ -199,7 +199,7 @@ const Dashboard = () => {
 				<DataTable
 					value={items}
 					rowHover
-					style={{ maxWidth: '700px', marginBottom: '20vh' }}
+					style={{ maxWidth: '700px', margin: '0 0 20vh 0' }}
 				>
 					<Column
 						header="Name"

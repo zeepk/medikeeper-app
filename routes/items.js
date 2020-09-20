@@ -74,8 +74,9 @@ router.post('/', async (req, res) => {
 // update one item
 router.put('/:id', getItem, async (req, res) => {
 	console.log(res.item);
+	console.log(req.body);
 	res.item[0].name = req.body.name || res.item[0].name;
-	res.item[0].cost = req.body.cost || res.item[0].cost;
+	res.item[0].cost = req.body.cost > 0 ? req.body.cost : 0;
 	res.item[0].lastUpdated = Date.now();
 	res.item[0].edited = false;
 
@@ -84,6 +85,7 @@ router.put('/:id', getItem, async (req, res) => {
 		res.json(updatedUser);
 	} catch (err) {
 		console.log('Error saving in API endpoint');
+		console.log(err.message);
 		res.status(400).json({ message: err.message });
 	}
 });

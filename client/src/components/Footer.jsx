@@ -17,7 +17,7 @@ const Footer = () => {
 				fontSize: '.9rem',
 				position: 'absolute',
 				bottom: 0,
-				width: '100vw',
+				width: '100%',
 			}}
 		>
 			{links.map((footerItem) => (

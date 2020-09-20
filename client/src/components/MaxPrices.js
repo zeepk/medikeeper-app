@@ -3,8 +3,8 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
 
 const MaxPrices = (props) => {
 	const [name, updateName] = useState('');
@@ -30,7 +30,7 @@ const MaxPrices = (props) => {
 					/>
 				</DataTable>
 			</Dialog>
-			<div className="p-grid" style={{ maxWidth: '700px' }}>
+			<div className="p-grid" style={{ maxWidth: '700px', margin: 0 }}>
 				<div className="p-col-12 p-sm-6 p-md-3">
 					<InputText
 						placeholder="Enter a name"
