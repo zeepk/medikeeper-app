@@ -5,8 +5,6 @@ const Footer = () => {
 		{ name: 'Code Source', link: 'https://github.com/zeepk/medikeeper-app' },
 		{ name: 'Copyright Info', link: '/' },
 		{ name: 'Contact Us', link: '/' },
-		{ name: 'Copyright Info', link: '/' },
-		{ name: 'Contact Us', link: '/' },
 	];
 	return (
 		<div
@@ -23,7 +21,7 @@ const Footer = () => {
 			}}
 		>
 			{links.map((footerItem) => (
-				<div key={footerItem} className="p-md-2 p-col-12">
+				<div key={footerItem.name} className="p-md-2 p-col-12">
 					<a
 						href={footerItem.link}
 						className="footer-link"
