@@ -6,9 +6,7 @@
 
 > <a href="https://medikeeper-app.herokuapp.com/apitest">API Test</a>
 
-[![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]
-
-***INSERT ANOTHER GRAPHIC HERE***
+[![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]()
 
 [![Home page](https://i.imgur.com/mx3ucWf.png)]()
 
