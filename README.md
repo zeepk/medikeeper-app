@@ -3,9 +3,10 @@
 > Simple app to simulate a basic inventory of items.
 
 > <a href="https://medikeeper-app.herokuapp.com/">Main Site</a>
+
 > <a href="https://medikeeper-app.herokuapp.com/apitest">API Test</a>
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=medikeeper-app)]
+[![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]
 
 ***INSERT ANOTHER GRAPHIC HERE***
 
