@@ -1,5 +1,3 @@
-<a href="https://matthughes.dev/"><img src="https://matthughes.dev/static/media/me2.39a739c4.jpg" title="Matt Hughes" alt="Matt Hughes"></a>
-
 # MediKeeper Sample App
 
 > Simple app to simulate a basic inventory of items.
