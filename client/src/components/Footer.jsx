@@ -95,9 +95,8 @@ const Footer = () => {
 					</p>
 					<div>
 						{footerItem.links.map((link) => (
-							<div style={{ margin: '5px 0' }}>
+							<div style={{ margin: '5px 0' }} key={link.name}>
 								<a
-									key={link.url}
 									href={link.url}
 									className="footer-link"
 									style={{ color: 'var(--font-color)' }}

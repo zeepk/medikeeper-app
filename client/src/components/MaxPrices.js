@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Dialog } from 'primereact/dialog';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';

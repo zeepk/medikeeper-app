@@ -33,7 +33,6 @@ const Dashboard = () => {
 		fetch('/api/items/maxprices')
 			.then((response) => response.json())
 			.then((res) => {
-				console.log(Object.keys(res));
 				updateMaxPrices(res);
 			})
 			.catch((err) => console.log(err));
