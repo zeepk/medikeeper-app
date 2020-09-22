@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MediKeeper Sample App
 
-## Available Scripts
+> Simple app to simulate a basic inventory of items.
 
-In the project directory, you can run:
+> <a href="https://medikeeper-app.herokuapp.com/">Main Site</a>
 
-### `yarn start`
+> <a href="https://medikeeper-app.herokuapp.com/apitest">API Test</a>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]()
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[![Home page](https://i.imgur.com/mx3ucWf.png)]()
 
-### `yarn test`
+- Image of the home page
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `yarn build`
+### Clone
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Clone this repo to your local machine using `https://github.com/zeepk/medikeeper-app`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> install all required packages for server and client
 
-### `yarn eject`
+```shell
+$ npm install
+$ cd client && npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> run the server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```shell
+$ npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> run the client
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```shell
+$ cd client
+$ bower install
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Front End
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React used for easy interface updating and management
+- PrimeReact used for nice looking UI elements
 
-### Code Splitting
+## Back End
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Node used to run server and contain routes
+- Routes include API endpoints
+  - GET `/api/items` returns all records for all items
+  - GET `/api/items/maxprices` returns the max prices for each item grouped by name
+  - GET `/api/items/maxitemprice/:name` returns the max price for all items of the provided name
+  - POST `/api/items` creates an item with values specified in the request body
+  - PUT `/api/items/:id` updates the item which corresponds to the provided ID using values specified in the request body
+  - DELETE `/api/items/:id` deletes the item which corresponds to the provided ID
 
-### Analyzing the Bundle Size
+## Tests
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- Run React JEST tests using `npm test` in the root directory
 
-### Making a Progressive Web App
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Thanks for checking it out!

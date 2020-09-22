@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
+import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -8,14 +9,14 @@ import { Toast } from 'primereact/toast';
 
 const MaxPrices = (props) => {
 	const [name, updateName] = useState('');
-	const [prices, updatePrices] = useState([]);
+	// const [prices, updatePrices] = useState([]);
 	const [visible, updateVisible] = useState(false);
 	const items = props.data;
 	let toast;
 	return (
-		<div style={{ marginBottom: '30px' }}>
+		<Card style={{ width: '100%', maxWidth: '95vw', borderRadius: '10px' }}>
 			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
-			<Dialog
+			{/* <Dialog
 				header="Max Prices"
 				visible={visible}
 				style={{ maxWidth: '90vw', width: '800px' }}
@@ -29,19 +30,18 @@ const MaxPrices = (props) => {
 						body={(rowData) => <div>{`$${rowData.cost}`}</div>}
 					/>
 				</DataTable>
-			</Dialog>
-			<div className="p-grid" style={{ maxWidth: '700px', margin: 0 }}>
-				<div className="p-col-12 p-sm-6 p-md-3">
+			</Dialog> */}
+			<div style={{ maxWidth: '700px', margin: 0 }}>
+				<div>
 					<InputText
 						placeholder="Enter a name"
 						value={name}
 						onChange={(e) => updateName(e.target.value)}
 					/>
 				</div>
-				<div className="p-col-6 p-sm-3">
+				<div>
 					<Button
-						className="p-button-rounded"
-						style={{ backgroundColor: '#009a6e' }}
+						style={{ margin: '10px 0 0 0' }}
 						label="Get Max Price"
 						type="submit"
 						onClick={() => {
@@ -73,7 +73,7 @@ const MaxPrices = (props) => {
 						}}
 					/>
 				</div>
-				<div className="p-col-6 p-sm-3">
+				{/* <div className="p-col-6 p-sm-3">
 					<Button
 						className="p-button-rounded"
 						style={{ backgroundColor: '#009a6e' }}
@@ -93,9 +93,9 @@ const MaxPrices = (props) => {
 								.catch((err) => console.log(err));
 						}}
 					/>
-				</div>
+				</div> */}
 			</div>
-		</div>
+		</Card>
 	);
 };
 

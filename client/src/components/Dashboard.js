@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import MaxPrices from './MaxPrices';
+import AddItem from './AddItem';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
@@ -11,8 +12,6 @@ const buttonSize = '40px';
 
 const Dashboard = () => {
 	const [items, updateItems] = useState([]);
-	const [name, updateName] = useState('');
-	const [cost, updateCost] = useState(0);
 	const [loading, updateLoading] = useState(true);
 
 	const getItems = () => {
@@ -139,89 +138,55 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div style={{ padding: '5vh 5vw 5vh 5vw', margin: 0 }}>
-			<MaxPrices data={items} />
-
-			<form
-				className="p-formgroup-inline"
-				onSubmit={(e) => {
-					e.preventDefault();
-					fetch('/api/items', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify({
-							id: 8,
-							name,
-							cost,
-						}),
-					})
-						.then((response) => {
-							response.json();
-						})
-						.catch((err) => console.log(err))
-						.finally(() => {
-							getItems();
-						});
-				}}
-			>
-				<div className="p-field">
-					<InputText
-						value={name}
-						onChange={(e) => updateName(e.target.value)}
-						placeholder="Enter a name"
+		<div
+			className="p-grid"
+			style={{
+				padding: '5vh 0vw',
+				margin: '0 auto',
+				maxWidth: '95vw',
+				width: '1000px',
+			}}
+		>
+			<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
+				<AddItem refreshItems={getItems} />
+				<MaxPrices data={items} />
+			</div>
+			<div className="p-col-9">
+				{loading ? (
+					<ProgressSpinner
+						strokeWidth={'2'}
+						style={{
+							height: '20vw',
+							width: '20vw',
+							postition: 'absolute',
+							left: '35vw',
+							top: '20vh',
+						}}
 					/>
-				</div>
-				<div className="p-field">
-					<InputNumber
-						value={cost}
-						onChange={(e) => updateCost(e.value)}
-						mode="currency"
-						currency="USD"
-						locale="en-US"
-					/>
-				</div>
-				<Button label="Add Item" type="submit" />
-			</form>
-			{loading ? (
-				<ProgressSpinner
-					strokeWidth={'2'}
-					style={{
-						height: '20vw',
-						width: '20vw',
-						postition: 'absolute',
-						left: '35vw',
-						top: '20vh',
-					}}
-				/>
-			) : (
-				<DataTable
-					value={items}
-					rowHover
-					style={{ maxWidth: '700px', margin: '0 0 20vh 0' }}
-				>
-					<Column
-						header="Name"
-						sortable
-						filter
-						filterPlaceholder="Search by name"
-						body={nameTemplate}
-						style={{ width: '30vw', maxWidth: '300px' }}
-					/>
-					<Column
-						header="Cost"
-						sortable
-						body={costTemplate}
-						style={{ width: '300px', maxWidth: '30vw' }}
-					/>
-					<Column
-						header=""
-						body={actionsTemplate}
-						style={{ width: '200px', maxWidth: '30vw' }}
-					/>
-				</DataTable>
-			)}
+				) : (
+					<DataTable value={items} rowHover>
+						<Column
+							header="Name"
+							field="name"
+							sortable
+							body={nameTemplate}
+							style={{ width: '30vw', maxWidth: '300px' }}
+						/>
+						<Column
+							header="Cost"
+							field="cost"
+							sortable
+							body={costTemplate}
+							style={{ width: '300px', maxWidth: '30vw' }}
+						/>
+						<Column
+							header=""
+							body={actionsTemplate}
+							style={{ width: '200px', maxWidth: '30vw' }}
+						/>
+					</DataTable>
+				)}
+			</div>
 		</div>
 	);
 };
