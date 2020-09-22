@@ -9,7 +9,11 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 const buttonSize = '40px';
-
+const viewWidth = Math.max(
+	document.documentElement.clientWidth || 0,
+	window.innerWidth || 0
+);
+console.log(viewWidth);
 const Dashboard = () => {
 	const [items, updateItems] = useState([]);
 	const [loading, updateLoading] = useState(true);
@@ -139,7 +143,7 @@ const Dashboard = () => {
 
 	return (
 		<div
-			className="p-grid"
+			className="p-grid p-dir-rev"
 			style={{
 				padding: '5vh 0vw',
 				margin: '0 auto',
@@ -147,11 +151,7 @@ const Dashboard = () => {
 				width: '1000px',
 			}}
 		>
-			<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
-				<AddItem refreshItems={getItems} />
-				<MaxPrices data={items} />
-			</div>
-			<div className="p-col-9">
+			<div className="p-col-12 p-sm-9 p-md-9 p-lg-9">
 				{loading ? (
 					<ProgressSpinner
 						strokeWidth={'2'}
@@ -164,20 +164,28 @@ const Dashboard = () => {
 						}}
 					/>
 				) : (
-					<DataTable value={items} rowHover>
+					<DataTable
+						value={items}
+						rowHover
+						paginator
+						paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+						currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+						rows={10}
+						rowsPerPageOptions={[10, 20, 50]}
+					>
 						<Column
 							header="Name"
 							field="name"
 							sortable
 							body={nameTemplate}
-							style={{ width: '30vw', maxWidth: '300px' }}
+							// style={{ width: '30vw', maxWidth: '300px' }}
 						/>
 						<Column
 							header="Cost"
 							field="cost"
 							sortable
 							body={costTemplate}
-							style={{ width: '300px', maxWidth: '30vw' }}
+							// style={{ width: '300px', maxWidth: '30vw' }}
 						/>
 						<Column
 							header=""
@@ -186,6 +194,10 @@ const Dashboard = () => {
 						/>
 					</DataTable>
 				)}
+			</div>
+			<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
+				<AddItem refreshItems={getItems} />
+				<MaxPrices data={items} />
 			</div>
 		</div>
 	);
