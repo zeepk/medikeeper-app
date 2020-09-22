@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MaxPrices from './MaxPrices';
 import AddItem from './AddItem';
+import PriceChart from './PriceChart';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -15,7 +16,9 @@ const viewWidth = Math.max(
 );
 console.log(viewWidth);
 const Dashboard = () => {
+	const [searchString, updateSearchString] = useState('');
 	const [items, updateItems] = useState([]);
+	const [maxPrices, updateMaxPrices] = useState([]);
 	const [loading, updateLoading] = useState(true);
 
 	const getItems = () => {
@@ -24,10 +27,16 @@ const Dashboard = () => {
 			.then((response) => response.json())
 			.then((res) => {
 				updateItems(res);
-				updateLoading(true);
 			})
 			.catch((err) => console.log(err))
 			.finally(() => updateLoading(false));
+		fetch('/api/items/maxprices')
+			.then((response) => response.json())
+			.then((res) => {
+				console.log(Object.keys(res));
+				updateMaxPrices(res);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	useEffect(() => {
@@ -88,7 +97,7 @@ const Dashboard = () => {
 				});
 		};
 		return (
-			<span>
+			<span style={{ float: 'right' }}>
 				{item.loading ? (
 					<ProgressSpinner
 						strokeWidth={'5'}
@@ -102,9 +111,13 @@ const Dashboard = () => {
 					<Button
 						icon="pi pi-save"
 						className="p-button-rounded"
-						disabled={!item.edited}
+						// disabled={!item.edited}
 						onClick={() => item.save()}
-						style={{ height: buttonSize, width: buttonSize }}
+						style={{
+							height: buttonSize,
+							width: buttonSize,
+							visibility: `${item.edited ? 'visible' : 'hidden'}`,
+						}}
 					/>
 				)}
 
@@ -142,63 +155,78 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div
-			className="p-grid p-dir-rev"
-			style={{
-				padding: '5vh 0vw',
-				margin: '0 auto',
-				maxWidth: '95vw',
-				width: '1000px',
-			}}
-		>
-			<div className="p-col-12 p-sm-9 p-md-9 p-lg-9">
-				{loading ? (
-					<ProgressSpinner
-						strokeWidth={'2'}
-						style={{
-							height: '20vw',
-							width: '20vw',
-							postition: 'absolute',
-							left: '35vw',
-							top: '20vh',
-						}}
+		<div>
+			<div style={{ width: '700px', maxWidth: '90vw', margin: '2vh auto' }}>
+				<span className="p-input-icon-left" style={{ width: '100%' }}>
+					<i className="pi pi-search" />
+					<InputText
+						placeholder="Search the inventory"
+						value={searchString}
+						onChange={(e) => updateSearchString(e.target.value)}
 					/>
-				) : (
-					<DataTable
-						value={items}
-						rowHover
-						paginator
-						paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-						currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-						rows={10}
-						rowsPerPageOptions={[10, 20, 50]}
-					>
-						<Column
-							header="Name"
-							field="name"
-							sortable
-							body={nameTemplate}
-							// style={{ width: '30vw', maxWidth: '300px' }}
-						/>
-						<Column
-							header="Cost"
-							field="cost"
-							sortable
-							body={costTemplate}
-							// style={{ width: '300px', maxWidth: '30vw' }}
-						/>
-						<Column
-							header=""
-							body={actionsTemplate}
-							style={{ width: '200px', maxWidth: '30vw' }}
-						/>
-					</DataTable>
-				)}
+				</span>
 			</div>
-			<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
-				<AddItem refreshItems={getItems} />
-				<MaxPrices data={items} />
+			<div
+				className="p-grid p-dir-rev"
+				style={{
+					padding: '0 0 5vh 0',
+					margin: '0 auto',
+					maxWidth: '95vw',
+					width: '1200px',
+				}}
+			>
+				<div className="p-col-12 p-sm-9 p-md-9 p-lg-9">
+					{loading ? (
+						<ProgressSpinner
+							strokeWidth={'2'}
+							style={{
+								height: '20vw',
+								width: '20vw',
+								postition: 'absolute',
+								left: '35vw',
+								top: '20vh',
+							}}
+						/>
+					) : (
+						<DataTable
+							value={items.filter((item) =>
+								item.name.toLowerCase().includes(searchString.toLowerCase())
+							)}
+							rowHover
+							paginator
+							paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+							currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+							rows={10}
+							rowsPerPageOptions={[10, 20, 50]}
+						>
+							<Column
+								header="Name"
+								field="name"
+								sortable
+								body={nameTemplate}
+								// style={{ width: '30vw', maxWidth: '300px' }}
+							/>
+							<Column
+								header="Cost"
+								field="cost"
+								sortable
+								body={costTemplate}
+								// style={{ width: '300px', maxWidth: '30vw' }}
+							/>
+							<Column
+								header=""
+								body={actionsTemplate}
+								style={{ width: '200px', maxWidth: '30vw' }}
+							/>
+						</DataTable>
+					)}
+				</div>
+				<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
+					<AddItem refreshItems={getItems} />
+					<MaxPrices data={items} />
+				</div>
 			</div>
+			<PriceChart vw={viewWidth} data={maxPrices} />
 		</div>
 	);
 };

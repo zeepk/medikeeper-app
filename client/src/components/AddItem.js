@@ -9,6 +9,7 @@ const AddItem = (props) => {
 	const [cost, updateCost] = useState(0);
 	return (
 		<Card
+			title="Add Item"
 			style={{
 				width: '100%',
 				maxWidth: '95vw',

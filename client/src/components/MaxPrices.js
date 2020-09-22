@@ -14,7 +14,10 @@ const MaxPrices = (props) => {
 	const items = props.data;
 	let toast;
 	return (
-		<Card style={{ width: '100%', maxWidth: '95vw', borderRadius: '10px' }}>
+		<Card
+			style={{ width: '100%', maxWidth: '95vw', borderRadius: '10px' }}
+			title="Max Item Price"
+		>
 			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
 			{/* <Dialog
 				header="Max Prices"

@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import AppRouter from './components/AppRouter';
 import Footer from './components/Footer';
 import 'primereact/resources/themes/arya-green/theme.css';
+// import 'primereact/resources/themes/nova-alt/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';

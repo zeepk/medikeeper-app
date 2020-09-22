@@ -4,7 +4,8 @@
 }
 .p-inputtext {
 	width: 100% !important;
-	border-color: #a6a6a6 !important;
+	border-color: #a6a6a680 !important;
+	background: rgb(49, 49, 49) !important;
 }
 td {
 	padding: 20px 15px 20px 5px !important;
