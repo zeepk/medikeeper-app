@@ -1,7 +1,6 @@
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import Logo from '../assets/images/logo.png';
-
 const items = [
 	{
 		label: 'Dashboard',
@@ -43,6 +42,7 @@ const Navbar = () => {
 					fontWeight: 'bold',
 					border: 'none',
 					borderRadius: 0,
+					color: 'white',
 				}}
 				model={items}
 				start={start}

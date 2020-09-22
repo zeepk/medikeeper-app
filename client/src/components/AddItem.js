@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Toast } from 'primereact/toast';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -7,6 +8,8 @@ import { InputNumber } from 'primereact/inputnumber';
 const AddItem = (props) => {
 	const [name, updateName] = useState('');
 	const [cost, updateCost] = useState(0);
+	let toast;
+
 	return (
 		<Card
 			title="Add Item"
@@ -15,8 +18,11 @@ const AddItem = (props) => {
 				maxWidth: '95vw',
 				borderRadius: '10px',
 				margin: '0 0 20px 0',
+				backgroundColor: 'var(--card-color)',
+				border: 'var(--card-border)',
 			}}
 		>
+			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
@@ -35,6 +41,12 @@ const AddItem = (props) => {
 						})
 						.catch((err) => console.log(err))
 						.finally(() => {
+							toast.show({
+								severity: 'success',
+								summary: `Successfully added a ${name} for $${cost}`,
+							});
+							updateName('');
+							updateCost(0);
 							props.refreshItems();
 						});
 				}}

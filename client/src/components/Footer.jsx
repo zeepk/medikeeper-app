@@ -1,34 +1,112 @@
 import React from 'react';
+import Logo from '../assets/images/logo.png';
 
 const Footer = () => {
 	const links = [
-		{ name: 'Code Source', link: 'https://github.com/zeepk/medikeeper-app' },
-		{ name: 'Copyright Info', link: '/' },
-		{ name: 'Contact Us', link: '/' },
+		{
+			header: 'Project',
+			links: [
+				{
+					name: 'Source Code',
+					url: 'https://github.com/zeepk/medikeeper-app',
+				},
+				{
+					name: 'Documentation',
+					url: 'https://github.com/zeepk/medikeeper-app/blob/master/README.md',
+				},
+				{
+					name: 'Hosting',
+					url: 'https://dashboard.heroku.com/apps',
+				},
+			],
+		},
+		{
+			header: 'About Me',
+			links: [
+				{
+					name: 'Portfolio',
+					url: 'https://matthughes.dev/',
+				},
+				{
+					name: 'Github',
+					url: 'https://github.com/zeepk',
+				},
+				{
+					name: 'Twitch',
+					url: 'https://www.twitch.tv/zee_pk',
+				},
+				{
+					name: 'Linkedin',
+					url: 'https://www.linkedin.com/in/matthughes-dev/',
+				},
+				{
+					name: 'Twitter',
+					url: 'https://twitter.com/matthughes2112',
+				},
+			],
+		},
+		{
+			header: 'About',
+			links: [
+				{
+					name: 'Our Team',
+					url: '/',
+				},
+				{
+					name: 'Mission Statement',
+					url: '/',
+				},
+				{
+					name: 'Careers',
+					url: '/',
+				},
+				{
+					name: 'Contact Us',
+					url: '/',
+				},
+				{
+					name: 'Copyright',
+					url: '/',
+				},
+			],
+		},
 	];
 	return (
 		<div
 			className="p-grid"
 			style={{
 				textAlign: 'left',
-				backgroundColor: '#6b6b6b',
+				backgroundColor: 'BLACK',
 				margin: 0,
-				padding: '0 5vw 2vh 5vw',
+				padding: '0 20vw 2vh 20vw',
 				fontSize: '.9rem',
 				position: 'absolute',
 				bottom: 0,
 				width: '100%',
 			}}
 		>
+			<div className="p-md-3 p-col-12">
+				<img alt="logo" src={Logo} height="200"></img>
+			</div>
 			{links.map((footerItem) => (
-				<div key={footerItem.name} className="p-md-2 p-col-12">
-					<a
-						href={footerItem.link}
-						className="footer-link"
-						style={{ color: 'white' }}
-					>
-						{footerItem.name}
-					</a>
+				<div key={footerItem.header} className="p-md-3 p-col-12">
+					<p style={{ color: 'white', fontSize: '1rem' }}>
+						{footerItem.header}
+					</p>
+					<div>
+						{footerItem.links.map((link) => (
+							<div style={{ margin: '5px 0' }}>
+								<a
+									key={link.url}
+									href={link.url}
+									className="footer-link"
+									style={{ color: 'var(--font-color)' }}
+								>
+									{link.name}
+								</a>
+							</div>
+						))}
+					</div>
 				</div>
 			))}
 

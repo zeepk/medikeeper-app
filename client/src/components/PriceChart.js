@@ -14,7 +14,7 @@ const PriceChart = (props) => {
 						color: 'transparent',
 					},
 					ticks: {
-						fontColor: 'white',
+						fontColor: 'var(--font-color)',
 					},
 				},
 			],
@@ -24,7 +24,7 @@ const PriceChart = (props) => {
 						color: 'transparent',
 					},
 					ticks: {
-						fontColor: 'white',
+						fontColor: 'var(--font-color)',
 					},
 				},
 			],
@@ -46,7 +46,9 @@ const PriceChart = (props) => {
 				borderRadius: '10px',
 				width: '800px',
 				maxWidth: '95vw',
-				margin: '0 auto 10vh auto',
+				margin: '0 auto 50vh auto',
+				backgroundColor: 'var(--card-color)',
+				border: 'var(--card-border)',
 			}}
 			title="Max Prices"
 		>
@@ -55,7 +57,6 @@ const PriceChart = (props) => {
 				type={props.vw <= 575 ? 'horizontalBar' : 'bar'}
 				data={chartData}
 				options={chartOptions}
-				style={{ color: 'white' }}
 			/>
 		</Card>
 	);

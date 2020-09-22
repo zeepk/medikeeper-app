@@ -3,6 +3,7 @@ import MaxPrices from './MaxPrices';
 import AddItem from './AddItem';
 import PriceChart from './PriceChart';
 import { DataTable } from 'primereact/datatable';
+import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -14,7 +15,6 @@ const viewWidth = Math.max(
 	document.documentElement.clientWidth || 0,
 	window.innerWidth || 0
 );
-console.log(viewWidth);
 const Dashboard = () => {
 	const [searchString, updateSearchString] = useState('');
 	const [items, updateItems] = useState([]);
@@ -172,10 +172,11 @@ const Dashboard = () => {
 					padding: '0 0 5vh 0',
 					margin: '0 auto',
 					maxWidth: '95vw',
-					width: '1200px',
+					width: '1500px',
 				}}
 			>
-				<div className="p-col-12 p-sm-9 p-md-9 p-lg-9">
+				<div className="p-col-12 p-sm-2 p-md-2 p-lg-2"></div>
+				<div className="p-col-12 p-sm-8 p-md-8 p-lg-8">
 					{loading ? (
 						<ProgressSpinner
 							strokeWidth={'2'}
@@ -188,40 +189,48 @@ const Dashboard = () => {
 							}}
 						/>
 					) : (
-						<DataTable
-							value={items.filter((item) =>
-								item.name.toLowerCase().includes(searchString.toLowerCase())
-							)}
-							rowHover
-							paginator
-							paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-							currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-							rows={10}
-							rowsPerPageOptions={[10, 20, 50]}
+						<Card
+							style={{
+								backgroundColor: 'var(--card-color)',
+								border: 'var(--card-border)',
+							}}
 						>
-							<Column
-								header="Name"
-								field="name"
-								sortable
-								body={nameTemplate}
-								// style={{ width: '30vw', maxWidth: '300px' }}
-							/>
-							<Column
-								header="Cost"
-								field="cost"
-								sortable
-								body={costTemplate}
-								// style={{ width: '300px', maxWidth: '30vw' }}
-							/>
-							<Column
-								header=""
-								body={actionsTemplate}
-								style={{ width: '200px', maxWidth: '30vw' }}
-							/>
-						</DataTable>
+							<DataTable
+								value={items.filter((item) =>
+									item.name.toLowerCase().includes(searchString.toLowerCase())
+								)}
+								className="p-datatable-striped"
+								rowHover
+								paginator
+								paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+								currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+								rows={10}
+								rowsPerPageOptions={[10, 20, 50]}
+							>
+								<Column
+									header="Name"
+									field="name"
+									sortable
+									body={nameTemplate}
+									// style={{ width: '30vw', maxWidth: '300px' }}
+								/>
+								<Column
+									header="Cost"
+									field="cost"
+									sortable
+									body={costTemplate}
+									// style={{ width: '300px', maxWidth: '30vw' }}
+								/>
+								<Column
+									header=""
+									body={actionsTemplate}
+									style={{ width: '200px', maxWidth: '30vw' }}
+								/>
+							</DataTable>
+						</Card>
 					)}
 				</div>
-				<div className="p-col-12 p-sm-3 p-md-3 p-lg-3">
+				<div className="p-col-12 p-sm-2 p-md-2 p-lg-2">
 					<AddItem refreshItems={getItems} />
 					<MaxPrices data={items} />
 				</div>
