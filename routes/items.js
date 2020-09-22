@@ -42,7 +42,6 @@ router.get('/maxitemprice/:name', async (req, res) => {
 			(item) => item.name.toLowerCase() === name.toLowerCase()
 		);
 		for (const item in filteredItems) {
-			console.log(filteredItems[item]);
 			maxPrice =
 				filteredItems[item].cost > maxPrice
 					? filteredItems[item].cost
@@ -73,8 +72,6 @@ router.post('/', async (req, res) => {
 
 // update one item
 router.put('/:id', getItem, async (req, res) => {
-	console.log(res.item);
-	console.log(req.body);
 	res.item[0].name = req.body.name || res.item[0].name;
 	res.item[0].cost = req.body.cost > 0 ? req.body.cost : 0;
 	res.item[0].lastUpdated = Date.now();
@@ -101,7 +98,6 @@ router.delete('/:id', getItem, async (req, res) => {
 });
 
 async function getItem(req, res, next) {
-	console.log(req.params.id);
 	let item;
 	try {
 		item = await Item.find({ _id: req.params.id });

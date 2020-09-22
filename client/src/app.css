@@ -1,16 +1,13 @@
 :root {
-	/* --bg-color: #4a4a4a; */
 	--bg-color: #edf0f0;
 	--font-color: white;
 	--card-color: white;
 	--card-border: none;
-	/* --card-border: 1px solid #f4f4f4; */
 	font-size: 16px;
 }
 .p-inputtext {
 	width: 100% !important;
 	border-color: #a6a6a680 !important;
-	/* background: rgb(49, 49, 49) !important; */
 }
 td {
 	padding: 20px 15px 20px 5px !important;
