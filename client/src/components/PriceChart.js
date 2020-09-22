@@ -1,6 +1,6 @@
 import React from 'react';
-import { Chart } from 'primereact/chart';
 import { Card } from 'primereact/card';
+import { Chart } from 'primereact/chart';
 
 const PriceChart = (props) => {
 	const chartOptions = {
@@ -46,7 +46,7 @@ const PriceChart = (props) => {
 				borderRadius: '10px',
 				width: '800px',
 				maxWidth: '95vw',
-				margin: '0 auto 50vh auto',
+				margin: '0 auto 80vh auto',
 				backgroundColor: 'var(--card-color)',
 				border: 'var(--card-border)',
 			}}

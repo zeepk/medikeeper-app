@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import MaxPrices from './MaxPrices';
-import { ProgressSpinner } from 'primereact/progressspinner';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { InputNumber } from 'primereact/inputnumber';
-import { Toast } from 'primereact/toast';
 import { Card } from 'primereact/card';
-import { DataTable } from 'primereact/datatable';
+import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { Dialog } from 'primereact/dialog';
+import { DataTable } from 'primereact/datatable';
+import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const APITest = () => {
 	const [items, updateItems] = useState([]);
@@ -244,7 +244,7 @@ const APITest = () => {
 							/>
 						</Card>
 					</div>
-					<div className="p-col-12 p-md-6" style={{ margin: '0 0 30vh 0' }}>
+					<div className="p-col-12 p-md-6" style={{ margin: '0 0 80vh 0' }}>
 						<InputTextarea
 							rows={2 + items.length * 10}
 							cols={20}

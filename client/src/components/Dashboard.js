@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import MaxPrices from './MaxPrices';
 import AddItem from './AddItem';
 import PriceChart from './PriceChart';
-import { DataTable } from 'primereact/datatable';
 import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { DataTable } from 'primereact/datatable';
 import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menubar } from 'primereact/menubar';
 import Logo from '../assets/images/logo.png';
+import { Menubar } from 'primereact/menubar';
 const items = [
 	{
 		label: 'Dashboard',

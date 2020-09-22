@@ -86,10 +86,10 @@ const Footer = () => {
 			}}
 		>
 			<div className="p-md-3 p-col-12">
-				<img alt="logo" src={Logo} height="200"></img>
+				<img alt="logo" src={Logo} style={{ width: '100%' }}></img>
 			</div>
 			{links.map((footerItem) => (
-				<div key={footerItem.header} className="p-md-3 p-col-12">
+				<div key={footerItem.header} className="p-md-3 p-col-6">
 					<p style={{ color: 'white', fontSize: '1rem' }}>
 						{footerItem.header}
 					</p>
