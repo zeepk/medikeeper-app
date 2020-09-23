@@ -234,6 +234,7 @@ const APITest = () => {
 											type="submit"
 											style={{ margin: '0 0 10px 0' }}
 											onClick={() => createItem()}
+											aria-label="create"
 										/>
 
 										<Button
@@ -242,12 +243,14 @@ const APITest = () => {
 											type="submit"
 											style={{ margin: '0 0 10px 0' }}
 											onClick={() => updateItem()}
+											aria-label="update"
 										/>
 										<Button
 											className="p-button-rounded p-button-danger"
 											label="Delete"
 											type="submit"
 											onClick={() => deleteItem()}
+											aria-label="delete"
 										/>
 									</div>
 								</div>
@@ -279,6 +282,7 @@ const APITest = () => {
 											})
 											.catch((err) => console.log(err));
 									}}
+									aria-label="all max prices"
 								/>
 							</Card>
 						</div>

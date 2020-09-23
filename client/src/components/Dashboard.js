@@ -110,13 +110,13 @@ const Dashboard = () => {
 					<Button
 						icon="pi pi-save"
 						className="p-button-rounded"
-						// disabled={!item.edited}
 						onClick={() => item.save()}
 						style={{
 							height: buttonSize,
 							width: buttonSize,
 							visibility: `${item.edited ? 'visible' : 'hidden'}`,
 						}}
+						aria-label="save"
 					/>
 				)}
 
@@ -148,6 +148,7 @@ const Dashboard = () => {
 						width: buttonSize,
 						margin: '0 0 0 10px',
 					}}
+					aria-label="delete"
 				/>
 			</span>
 		);
