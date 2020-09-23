@@ -1,1 +1,116 @@
-{"numFailedTestSuites":0,"numFailedTests":0,"numPassedTestSuites":1,"numPassedTests":9,"numPendingTestSuites":0,"numPendingTests":0,"numRuntimeErrorTestSuites":0,"numTodoTests":0,"numTotalTestSuites":1,"numTotalTests":9,"openHandles":[],"snapshot":{"added":0,"didUpdate":false,"failure":false,"filesAdded":0,"filesRemoved":0,"filesRemovedList":[],"filesUnmatched":0,"filesUpdated":0,"matched":0,"total":0,"unchecked":0,"uncheckedKeysByFile":[],"unmatched":0,"updated":0},"startTime":1600832082299,"success":true,"testResults":[{"assertionResults":[{"ancestorTitles":[],"failureMessages":[],"fullName":"Navbar renders title","location":null,"status":"passed","title":"Navbar renders title"},{"ancestorTitles":[],"failureMessages":[],"fullName":"Navbar renders both links","location":null,"status":"passed","title":"Navbar renders both links"},{"ancestorTitles":[],"failureMessages":[],"fullName":"Dashboard renders Search bar","location":null,"status":"passed","title":"Dashboard renders Search bar"},{"ancestorTitles":[],"failureMessages":[],"fullName":"Dashboard renders Add Item card","location":null,"status":"passed","title":"Dashboard renders Add Item card"},{"ancestorTitles":[],"failureMessages":[],"fullName":"Dashboard renders Max Item Price card","location":null,"status":"passed","title":"Dashboard renders Max Item Price card"},{"ancestorTitles":[],"failureMessages":[],"fullName":"Dashboard renders Max Item Prices chart","location":null,"status":"passed","title":"Dashboard renders Max Item Prices chart"},{"ancestorTitles":[],"failureMessages":[],"fullName":"API Test page renders Create button","location":null,"status":"passed","title":"API Test page renders Create button"},{"ancestorTitles":[],"failureMessages":[],"fullName":"API Test page renders Update Button","location":null,"status":"passed","title":"API Test page renders Update Button"},{"ancestorTitles":[],"failureMessages":[],"fullName":"API Test page renders Delete button","location":null,"status":"passed","title":"API Test page renders Delete button"}],"endTime":1600832090180,"message":"","name":"/Users/matthughes/Documents/dev/medikeeper-app/client/src/App.test.js","startTime":1600832084004,"status":"passed","summary":""}],"wasInterrupted":false}
+{
+	"numFailedTestSuites": 0,
+	"numFailedTests": 0,
+	"numPassedTestSuites": 1,
+	"numPassedTests": 9,
+	"numPendingTestSuites": 0,
+	"numPendingTests": 0,
+	"numRuntimeErrorTestSuites": 0,
+	"numTodoTests": 0,
+	"numTotalTestSuites": 1,
+	"numTotalTests": 9,
+	"openHandles": [],
+	"snapshot": {
+		"added": 0,
+		"didUpdate": false,
+		"failure": false,
+		"filesAdded": 0,
+		"filesRemoved": 0,
+		"filesRemovedList": [],
+		"filesUnmatched": 0,
+		"filesUpdated": 0,
+		"matched": 0,
+		"total": 0,
+		"unchecked": 0,
+		"uncheckedKeysByFile": [],
+		"unmatched": 0,
+		"updated": 0
+	},
+	"startTime": 1600832082299,
+	"success": true,
+	"testResults": [
+		{
+			"assertionResults": [
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Navbar renders title",
+					"location": null,
+					"status": "passed",
+					"title": "Navbar renders title"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Navbar renders both links",
+					"location": null,
+					"status": "passed",
+					"title": "Navbar renders both links"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Dashboard renders Search bar",
+					"location": null,
+					"status": "passed",
+					"title": "Dashboard renders Search bar"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Dashboard renders Add Item card",
+					"location": null,
+					"status": "passed",
+					"title": "Dashboard renders Add Item card"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Dashboard renders Max Item Price card",
+					"location": null,
+					"status": "passed",
+					"title": "Dashboard renders Max Item Price card"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "Dashboard renders Max Item Prices chart",
+					"location": null,
+					"status": "passed",
+					"title": "Dashboard renders Max Item Prices chart"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "API Test page renders Create button",
+					"location": null,
+					"status": "passed",
+					"title": "API Test page renders Create button"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "API Test page renders Update Button",
+					"location": null,
+					"status": "passed",
+					"title": "API Test page renders Update Button"
+				},
+				{
+					"ancestorTitles": [],
+					"failureMessages": [],
+					"fullName": "API Test page renders Delete button",
+					"location": null,
+					"status": "passed",
+					"title": "API Test page renders Delete button"
+				}
+			],
+			"endTime": 1600832090180,
+			"message": "",
+			"name": "/Users/matthughes/Documents/dev/medikeeper-app/client/src/App.test.js",
+			"startTime": 1600832084004,
+			"status": "passed",
+			"summary": ""
+		}
+	],
+	"wasInterrupted": false
+}

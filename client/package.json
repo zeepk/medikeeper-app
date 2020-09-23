@@ -19,7 +19,7 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build",
+		"build": "npm test -- --json --outputFile=src/test_output.json --watchAll=false && react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
