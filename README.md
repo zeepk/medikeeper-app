@@ -45,6 +45,7 @@ $ bower install
 ## Front End
 - React used for easy interface updating and management
 - PrimeReact used for nice looking UI elements
+- Jest used to run unit tests
 ## Back End
 - Node used to run server and contain routes
 - Routes include API endpoints
@@ -58,6 +59,7 @@ $ bower install
 ## Tests
 
 - Run React JEST tests using `npm test` in the root directory
+- Most recent test reports can be found on the API Tests page
 
 ---
 
