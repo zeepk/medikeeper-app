@@ -26,7 +26,7 @@ const Dashboard = () => {
 		fetch('/api/items')
 			.then((response) => response.json())
 			.then((res) => {
-				updateItems(res);
+				updateItems(res.sort((a, b) => a.lastUpdated < b.lastUpdated));
 			})
 			.catch((err) => console.log(err))
 			.finally(() => updateLoading(false));
