@@ -67,7 +67,7 @@ const AddItem = (props) => {
 						locale="en-US"
 					/>
 				</div>
-				<Button label="Add Item" type="submit" />
+				<Button label="Confirm" type="submit" />
 			</form>
 		</Card>
 	);

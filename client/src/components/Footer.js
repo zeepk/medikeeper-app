@@ -75,7 +75,7 @@ const Footer = () => {
 		<div
 			className="p-grid"
 			style={{
-				textAlign: 'left',
+				textAlign: 'center',
 				backgroundColor: 'BLACK',
 				margin: 0,
 				padding: '0 20vw 2vh 20vw',
@@ -86,11 +86,15 @@ const Footer = () => {
 			}}
 		>
 			<div className="p-md-3 p-col-12">
-				<img alt="logo" src={Logo} style={{ width: '100%' }}></img>
+				<img
+					alt="logo"
+					src={Logo}
+					style={{ width: '50%', display: 'block', margin: '0 auto' }}
+				></img>
 			</div>
 			{links.map((footerItem) => (
 				<div key={footerItem.header} className="p-md-3 p-col-6">
-					<p style={{ color: 'white', fontSize: '1rem' }}>
+					<p style={{ color: 'white', fontSize: '1.2rem' }}>
 						{footerItem.header}
 					</p>
 					<div>

@@ -39,5 +39,7 @@
 		]
 	},
 	"proxy": "http://localhost:5000",
-	"devDependencies": {}
+	"devDependencies": {
+		"canvas": "^2.6.1"
+	}
 }

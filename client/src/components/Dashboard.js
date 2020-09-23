@@ -211,19 +211,19 @@ const Dashboard = () => {
 									field="name"
 									sortable
 									body={nameTemplate}
-									// style={{ width: '30vw', maxWidth: '300px' }}
+									style={{ width: '45%', maxWidth: '300px' }}
 								/>
 								<Column
 									header="Cost"
 									field="cost"
 									sortable
 									body={costTemplate}
-									// style={{ width: '300px', maxWidth: '30vw' }}
+									style={{ width: '45%', maxWidth: '300px' }}
 								/>
 								<Column
 									header=""
 									body={actionsTemplate}
-									style={{ width: '200px', maxWidth: '30vw' }}
+									style={{ width: '30vw', maxWidth: '200px' }}
 								/>
 							</DataTable>
 						</Card>

@@ -10,6 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { ProgressSpinner } from 'primereact/progressspinner';
+const data = require('../test_output.json');
 
 const APITest = () => {
 	const [items, updateItems] = useState([]);
@@ -62,6 +63,7 @@ const APITest = () => {
 					textAlign: 'center',
 					fontWeight: 'bold',
 					fontSize: '1.2rem',
+					color: 'white',
 				}}
 			>
 				Feel free to use the inputs on this page to test the API functionality!
@@ -244,7 +246,13 @@ const APITest = () => {
 							/>
 						</Card>
 					</div>
-					<div className="p-col-12 p-md-6" style={{ margin: '0 0 80vh 0' }}>
+					<div
+						className="p-col-12 p-md-6"
+						style={{
+							maxHeight: '80vh',
+							overflow: 'auto',
+						}}
+					>
 						<InputTextarea
 							rows={2 + items.length * 10}
 							cols={20}
@@ -254,6 +262,66 @@ const APITest = () => {
 					</div>
 				</div>
 			)}
+			<div style={{ margin: '0 0 80vh 0' }}>
+				<Card
+					style={{
+						borderRadius: '10px',
+						backgroundColor: 'var(--card-color)',
+						border: 'var(--card-border)',
+						margin: '0 auto',
+						width: '90vw',
+						maxWidth: '600px',
+					}}
+					title="React Unit Test Results"
+				>
+					<DataTable
+						className="p-datatable-striped"
+						value={data.testResults[0].assertionResults}
+						paginator
+						paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+						currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+						rows={10}
+						rowsPerPageOptions={[10, 20, 50]}
+					>
+						<Column field="title" header="Test" />
+						<Column
+							style={{ textAlign: 'right' }}
+							field="passed"
+							header="Result"
+							body={(rowData) => {
+								if (rowData.status === 'passed') {
+									return (
+										<span className="p-badge p-badge-lg p-badge-success">
+											<i
+												className="pi pi-check"
+												style={{ fontSize: '1rem' }}
+											></i>
+										</span>
+									);
+								} else if (rowData.status === 'failed') {
+									return (
+										<span className="p-badge p-badge-lg p-badge-danger">
+											<i
+												className="pi pi-times"
+												style={{ fontSize: '1rem' }}
+											></i>
+										</span>
+									);
+								} else {
+									return (
+										<span className="p-badge p-badge-lg p-badge-warning">
+											<i
+												className="pi pi-question-circle"
+												style={{ fontSize: '1rem' }}
+											></i>
+										</span>
+									);
+								}
+							}}
+						/>
+					</DataTable>
+				</Card>
+			</div>
 		</div>
 	);
 };
