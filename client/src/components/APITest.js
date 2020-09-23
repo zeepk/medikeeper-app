@@ -11,6 +11,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { ProgressSpinner } from 'primereact/progressspinner';
 const data = require('../test_output.json');
+const testDate = new Date(data.startTime);
 const testResultIcon = (result, size) => {
 	if (result === 'passed') {
 		return (
@@ -358,7 +359,7 @@ const APITest = () => {
 								width: '90vw',
 								maxWidth: '100%',
 							}}
-							title="React Unit Test Results"
+							title={`Test Results for ${testDate.toLocaleString()}`}
 						>
 							<DataTable
 								className="p-datatable-striped"
