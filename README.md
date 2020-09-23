@@ -14,7 +14,11 @@
 
 > Search the inventory using the search bar above the table
 
-> Sort by Name or Price by clicking the appropriate column header
+> Sort by name or cost by clicking the appropriate column header
+
+> Update an item by typing a new name or cost in the table, and then selecting the save icon
+
+> Delete an item by selecting the red remove button on the right side of the corresponding row
 
 > Add an item or check the max price of an item by using the tools on the left
 
@@ -66,10 +70,10 @@ $ bower install
 
 ## Tests
 
-- Run React JEST tests using `npm test` in the root directory
+- Run React Jest tests using `npm test` in the root directory
 - Most recent test reports can be found on the API Tests page
 - The app will not deploy if any tests produce a failed result
 
 ---
 
-### Thanks for checking it out! 
+### Thanks for checking it out! Please reach out with any questions or suggestions!
