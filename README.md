@@ -60,6 +60,7 @@ $ bower install
 
 - Run React JEST tests using `npm test` in the root directory
 - Most recent test reports can be found on the API Tests page
+- The app will not deploy if any tests produce a failed result
 
 ---
 
