@@ -51,15 +51,14 @@ const APITest = () => {
 
 	const [visible, updateVisible] = useState(false);
 
-	let toast;
+	let toast = <Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />;
 
 	const getItems = () => {
 		updateLoading(true);
 		fetch('/api/items')
 			.then((response) => response.json())
 			.then((res) => {
-				updateItems(res);
-				updateLoading(true);
+				updateItems(res.sort((a, b) => a.lastUpdated < b.lastUpdated));
 			})
 			.catch((err) => console.log(err))
 			.finally(() => updateLoading(false));
@@ -68,6 +67,83 @@ const APITest = () => {
 	useEffect(() => {
 		getItems();
 	}, []);
+
+	const createItem = () => {
+		if (!name) {
+			toast.show({
+				severity: 'error',
+				summary: 'Please enter a Name',
+			});
+		} else {
+			fetch('/api/items', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name,
+					cost,
+				}),
+			})
+				.then((response) => {
+					response.json();
+				})
+				.catch((err) => console.log(err))
+				.finally(() => {
+					getItems();
+				});
+		}
+	};
+
+	const updateItem = () => {
+		if (!id) {
+			toast.show({
+				severity: 'error',
+				summary: 'Please enter an ID',
+			});
+		} else {
+			if (name.length === 0) {
+				toast.show({
+					severity: 'warn',
+					summary: 'Name cannot be blank, the field will not be updated.',
+				});
+			}
+			fetch(`/api/items/${id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					name: name,
+					cost: cost,
+				}),
+			})
+				.then((response) => response.json())
+				.then(() => {
+					getItems();
+				});
+		}
+	};
+
+	const deleteItem = () => {
+		if (!items.find((arrayItem) => arrayItem._id === id)) {
+			toast.show({
+				severity: 'error',
+				summary: 'No item was found with that ID.',
+			});
+		} else {
+			fetch(`/api/items/${id}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+				.then((response) => response.json())
+				.then(() => {
+					updateItems([...items.filter((arrayItem) => arrayItem._id !== id)]);
+				});
+		}
+	};
 
 	return (
 		<div>
@@ -86,19 +162,7 @@ const APITest = () => {
 					/>
 				</DataTable>
 			</Dialog>
-			<p
-				style={{
-					margin: '2vh 5vw',
-					textAlign: 'left',
-					fontWeight: 'bold',
-					fontSize: '4rem',
-					color: 'white',
-				}}
-			>
-				API
-			</p>
-			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
-
+			{toast}
 			{loading ? (
 				<ProgressSpinner
 					strokeWidth={'2'}
@@ -111,188 +175,128 @@ const APITest = () => {
 					}}
 				/>
 			) : (
-				<div
-					className="p-grid"
-					style={{ margin: 0, padding: '5vh 5vw', maxWidth: '1200px' }}
-				>
-					<div className="p-col-12 p-md-4">
-						<Card
-							style={{
-								borderRadius: '10px',
-								backgroundColor: 'var(--card-color)',
-								border: 'var(--card-border)',
-								margin: '0 0 5vh 0',
-							}}
-							title="CRUD Data"
-						>
-							<div className="p-grid" style={{ maxWidth: '700px', margin: 0 }}>
-								<div className="p-col-12 p-sm-8">
-									<InputText
-										value={id}
-										onChange={(e) => updateID(e.target.value)}
-										placeholder="Copy/paste an _id"
-										style={{ margin: '0 0 10px 0' }}
-									/>
-									<InputText
-										value={name}
-										onChange={(e) => updateName(e.target.value)}
-										placeholder="Enter a name"
-										style={{ margin: '0 0 10px 0' }}
-									/>
-									<InputNumber
-										value={cost}
-										onChange={(e) => updateCost(e.value)}
-										mode="currency"
-										currency="USD"
-										locale="en-US"
-									/>
-								</div>
-								<div className="p-col-6 p-sm-3">
-									<Button
-										className="p-button-rounded p-button-success"
-										label="Create"
-										type="submit"
-										style={{ margin: '0 0 10px 0' }}
-										onClick={() => {
-											if (!name) {
-												toast.show({
-													severity: 'error',
-													summary: 'Please enter a Name',
-												});
-											} else {
-												fetch('/api/items', {
-													method: 'POST',
-													headers: {
-														'Content-Type': 'application/json',
-													},
-													body: JSON.stringify({
-														name,
-														cost,
-													}),
-												})
-													.then((response) => {
-														response.json();
-													})
-													.catch((err) => console.log(err))
-													.finally(() => {
-														getItems();
-													});
-											}
-										}}
-									/>
-
-									<Button
-										className="p-button-rounded"
-										label="Update"
-										type="submit"
-										style={{ margin: '0 0 10px 0' }}
-										onClick={() => {
-											if (!id) {
-												toast.show({
-													severity: 'error',
-													summary: 'Please enter an ID',
-												});
-											} else {
-												if (name.length === 0) {
-													toast.show({
-														severity: 'warn',
-														summary:
-															'Name cannot be blank, the field will not be updated.',
-													});
-												}
-												fetch(`/api/items/${id}`, {
-													method: 'PUT',
-													headers: {
-														'Content-Type': 'application/json',
-													},
-													body: JSON.stringify({
-														name: name,
-														cost: cost,
-													}),
-												})
-													.then((response) => response.json())
-													.then(() => {
-														getItems();
-													});
-											}
-										}}
-									/>
-									<Button
-										className="p-button-rounded p-button-danger"
-										label="Delete"
-										type="submit"
-										onClick={() => {
-											if (!items.find((arrayItem) => arrayItem._id === id)) {
-												toast.show({
-													severity: 'error',
-													summary: 'No item was found with that ID.',
-												});
-											} else {
-												fetch(`/api/items/${id}`, {
-													method: 'DELETE',
-													headers: {
-														'Content-Type': 'application/json',
-													},
-												})
-													.then((response) => response.json())
-													.then(() => {
-														updateItems([
-															...items.filter(
-																(arrayItem) => arrayItem._id !== id
-															),
-														]);
-													});
-											}
-										}}
-									/>
-								</div>
-							</div>
-						</Card>
-
-						<MaxPrices data={items} />
-						<Card
-							style={{
-								borderRadius: '10px',
-								backgroundColor: 'var(--card-color)',
-								border: 'var(--card-border)',
-								margin: '5vh 0 5vh 0',
-							}}
-							title="Show Max Prices"
-						>
-							<Button
-								label="All Max Prices"
-								type="submit"
-								onClick={() => {
-									fetch('/api/items/maxprices')
-										.then((response) => response.json())
-										.then((res) => {
-											updatePrices(
-												Object.keys(res).map((key) => {
-													return { name: key, cost: res[key] };
-												})
-											);
-											updateVisible(true);
-										})
-										.catch((err) => console.log(err));
-								}}
-							/>
-						</Card>
-					</div>
-					<div
-						className="p-col-12 p-md-8"
+				<div>
+					<p
 						style={{
-							maxHeight: '80vh',
-							overflow: 'auto',
+							margin: '2vh 5vw',
+							textAlign: 'left',
+							fontWeight: 'bold',
+							fontSize: '4rem',
+							color: 'white',
 						}}
 					>
-						<InputTextarea
-							rows={2 + items.length * 10}
-							cols={20}
-							value={JSON.stringify(items, undefined, 4)}
-							autoResize
-							readOnly
-							data-testid="JSON records"
-						/>
+						API
+					</p>
+					<div
+						className="p-grid"
+						style={{ margin: '0 auto', padding: '5vh 5vw', maxWidth: '1200px' }}
+					>
+						<div className="p-col-12 p-md-4">
+							<Card
+								style={{
+									borderRadius: '10px',
+									backgroundColor: 'var(--card-color)',
+									border: 'var(--card-border)',
+									margin: '0 0 5vh 0',
+								}}
+								title="CRUD Data"
+							>
+								<div
+									className="p-grid"
+									style={{ maxWidth: '700px', margin: 0 }}
+								>
+									<div className="p-col-12 p-sm-8">
+										<InputText
+											value={id}
+											onChange={(e) => updateID(e.target.value)}
+											placeholder="Copy/paste an _id"
+											style={{ margin: '0 0 10px 0' }}
+										/>
+										<InputText
+											value={name}
+											onChange={(e) => updateName(e.target.value)}
+											placeholder="Enter a name"
+											style={{ margin: '0 0 10px 0' }}
+										/>
+										<InputNumber
+											value={cost}
+											onChange={(e) => updateCost(e.value)}
+											mode="currency"
+											currency="USD"
+											locale="en-US"
+										/>
+									</div>
+									<div className="p-col-6 p-sm-3">
+										<Button
+											className="p-button-rounded p-button-success"
+											label="Create"
+											type="submit"
+											style={{ margin: '0 0 10px 0' }}
+											onClick={() => createItem()}
+										/>
+
+										<Button
+											className="p-button-rounded"
+											label="Update"
+											type="submit"
+											style={{ margin: '0 0 10px 0' }}
+											onClick={() => updateItem()}
+										/>
+										<Button
+											className="p-button-rounded p-button-danger"
+											label="Delete"
+											type="submit"
+											onClick={() => deleteItem()}
+										/>
+									</div>
+								</div>
+							</Card>
+
+							<MaxPrices data={items} />
+							<Card
+								style={{
+									borderRadius: '10px',
+									backgroundColor: 'var(--card-color)',
+									border: 'var(--card-border)',
+									margin: '5vh 0 5vh 0',
+								}}
+								title="Show Max Prices"
+							>
+								<Button
+									label="All Max Prices"
+									type="submit"
+									onClick={() => {
+										fetch('/api/items/maxprices')
+											.then((response) => response.json())
+											.then((res) => {
+												updatePrices(
+													Object.keys(res).map((key) => {
+														return { name: key, cost: res[key] };
+													})
+												);
+												updateVisible(true);
+											})
+											.catch((err) => console.log(err));
+									}}
+								/>
+							</Card>
+						</div>
+						<div
+							className="p-col-12 p-md-8"
+							style={{
+								maxHeight: '75vh',
+								overflow: 'auto',
+							}}
+						>
+							<InputTextarea
+								rows={2 + items.length * 10}
+								cols={20}
+								value={JSON.stringify(items, undefined, 4)}
+								autoResize
+								readOnly
+								data-testid="JSON records"
+							/>
+						</div>
 					</div>
 				</div>
 			)}
@@ -307,7 +311,7 @@ const APITest = () => {
 			>
 				Tests
 			</p>
-			<div style={{ margin: '0 auto 80vh 0', maxWidth: '1200px' }}>
+			<div style={{ margin: '0 auto 80vh auto', maxWidth: '1200px' }}>
 				<div
 					className="p-grid p-dir-rev"
 					style={{ margin: 0, padding: '5vh 5vw' }}
