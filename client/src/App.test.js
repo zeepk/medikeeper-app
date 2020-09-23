@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
-import Dashboard from './components/Dashboard';
 import APITest from './components/APITest';
 import Footer from './components/Footer';
 
@@ -62,12 +61,6 @@ test('API Test page renders Update Button', () => {
 test('API Test page renders Delete button', () => {
 	const { getByText } = render(<APITest />);
 	const testElement = getByText(/Delete/i);
-	expect(testElement).toBeInTheDocument();
-});
-
-test('API Test page renders test result table', () => {
-	const { getByText } = render(<APITest />);
-	const testElement = getByText(/React Unit Test Results/i);
 	expect(testElement).toBeInTheDocument();
 });
 
