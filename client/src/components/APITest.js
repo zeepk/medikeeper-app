@@ -11,7 +11,36 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { ProgressSpinner } from 'primereact/progressspinner';
 const data = require('../test_output.json');
-
+const testResultIcon = (result, size) => {
+	if (result === 'passed') {
+		return (
+			<span
+				className="p-badge p-badge-lg p-badge-success"
+				style={{ fontSize: size, height: '100%' }}
+			>
+				<i className="pi pi-check" style={{ fontSize: size }}></i>
+			</span>
+		);
+	} else if (result === 'failed') {
+		return (
+			<span
+				className="p-badge p-badge-lg p-badge-danger"
+				style={{ fontSize: size, height: '100%' }}
+			>
+				<i className="pi pi-times" style={{ fontSize: size }}></i>
+			</span>
+		);
+	} else {
+		return (
+			<span
+				className="p-badge p-badge-lg p-badge-warning"
+				style={{ fontSize: size, height: '100%' }}
+			>
+				<i className="pi pi-question-circle" style={{ fontSize: size }}></i>
+			</span>
+		);
+	}
+};
 const APITest = () => {
 	const [items, updateItems] = useState([]);
 	const [loading, updateLoading] = useState(true);
@@ -60,13 +89,13 @@ const APITest = () => {
 			<p
 				style={{
 					margin: '2vh 5vw',
-					textAlign: 'center',
+					textAlign: 'left',
 					fontWeight: 'bold',
-					fontSize: '1.2rem',
+					fontSize: '4rem',
 					color: 'white',
 				}}
 			>
-				Feel free to use the inputs on this page to test the API functionality!
+				API
 			</p>
 			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
 
@@ -82,8 +111,11 @@ const APITest = () => {
 					}}
 				/>
 			) : (
-				<div className="p-grid" style={{ margin: 0, padding: '5vh 5vw' }}>
-					<div className="p-col-12 p-md-6">
+				<div
+					className="p-grid"
+					style={{ margin: 0, padding: '5vh 5vw', maxWidth: '1200px' }}
+				>
+					<div className="p-col-12 p-md-4">
 						<Card
 							style={{
 								borderRadius: '10px',
@@ -94,7 +126,7 @@ const APITest = () => {
 							title="CRUD Data"
 						>
 							<div className="p-grid" style={{ maxWidth: '700px', margin: 0 }}>
-								<div className="p-col-12 p-sm-6">
+								<div className="p-col-12 p-sm-8">
 									<InputText
 										value={id}
 										onChange={(e) => updateID(e.target.value)}
@@ -247,7 +279,7 @@ const APITest = () => {
 						</Card>
 					</div>
 					<div
-						className="p-col-12 p-md-6"
+						className="p-col-12 p-md-8"
 						style={{
 							maxHeight: '80vh',
 							overflow: 'auto',
@@ -258,69 +290,92 @@ const APITest = () => {
 							cols={20}
 							value={JSON.stringify(items, undefined, 4)}
 							autoResize
+							readOnly
+							data-testid="JSON records"
 						/>
 					</div>
 				</div>
 			)}
-			<div style={{ margin: '0 0 80vh 0' }}>
-				<Card
-					style={{
-						borderRadius: '10px',
-						backgroundColor: 'var(--card-color)',
-						border: 'var(--card-border)',
-						margin: '0 auto',
-						width: '90vw',
-						maxWidth: '600px',
-					}}
-					title="React Unit Test Results"
+			<p
+				style={{
+					margin: '5vh 5vw',
+					textAlign: 'left',
+					fontWeight: 'bold',
+					fontSize: '4rem',
+					color: 'white',
+				}}
+			>
+				Tests
+			</p>
+			<div style={{ margin: '0 auto 80vh 0', maxWidth: '1200px' }}>
+				<div
+					className="p-grid p-dir-rev"
+					style={{ margin: 0, padding: '5vh 5vw' }}
 				>
-					<DataTable
-						className="p-datatable-striped"
-						value={data.testResults[0].assertionResults}
-						paginator
-						paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-						currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-						rows={10}
-						rowsPerPageOptions={[10, 20, 50]}
-					>
-						<Column field="title" header="Test" />
-						<Column
-							style={{ textAlign: 'right' }}
-							field="passed"
-							header="Result"
-							body={(rowData) => {
-								if (rowData.status === 'passed') {
-									return (
-										<span className="p-badge p-badge-lg p-badge-success">
-											<i
-												className="pi pi-check"
-												style={{ fontSize: '1rem' }}
-											></i>
-										</span>
-									);
-								} else if (rowData.status === 'failed') {
-									return (
-										<span className="p-badge p-badge-lg p-badge-danger">
-											<i
-												className="pi pi-times"
-												style={{ fontSize: '1rem' }}
-											></i>
-										</span>
-									);
-								} else {
-									return (
-										<span className="p-badge p-badge-lg p-badge-warning">
-											<i
-												className="pi pi-question-circle"
-												style={{ fontSize: '1rem' }}
-											></i>
-										</span>
-									);
-								}
+					<div className="p-col-12 p-md-3">
+						<Card
+							title="Duration"
+							style={{
+								textAlign: 'center',
+								borderRadius: '10px',
+								backgroundColor: 'var(--card-color)',
+								border: 'var(--card-border)',
+								margin: '0 0 5vh 0',
 							}}
-						/>
-					</DataTable>
-				</Card>
+						>
+							<p style={{ fontSize: '5rem', margin: 0 }}>{`${
+								Math.round(
+									((data.testResults[0].endTime -
+										data.testResults[0].startTime) /
+										1000) *
+										10
+								) / 10
+							}s`}</p>
+						</Card>
+						<Card
+							title="Status"
+							style={{
+								textAlign: 'center',
+								borderRadius: '10px',
+								backgroundColor: 'var(--card-color)',
+								border: 'var(--card-border)',
+							}}
+						>
+							{testResultIcon(data.testResults[0].status, '6rem')}
+						</Card>
+					</div>
+					<div className="p-col-12 p-md-9">
+						<Card
+							style={{
+								borderRadius: '10px',
+								backgroundColor: 'var(--card-color)',
+								border: 'var(--card-border)',
+								margin: '0 auto',
+								width: '90vw',
+								maxWidth: '100%',
+							}}
+							title="React Unit Test Results"
+						>
+							<DataTable
+								className="p-datatable-striped"
+								value={data.testResults[0].assertionResults}
+								paginator
+								paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+								currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+								rows={10}
+								rowsPerPageOptions={[10, 20, 50]}
+							>
+								<Column field="title" header="Test" />
+								<Column
+									style={{ textAlign: 'right' }}
+									field="passed"
+									header="Result"
+									body={(rowData) => testResultIcon(rowData.status, '1rem')}
+								/>
+							</DataTable>
+						</Card>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

@@ -65,6 +65,24 @@ test('API Test page renders Delete button', () => {
 	expect(testElement).toBeInTheDocument();
 });
 
+test('API Test page renders test result table', () => {
+	const { getByText } = render(<APITest />);
+	const testElement = getByText(/React Unit Test Results/i);
+	expect(testElement).toBeInTheDocument();
+});
+
+test('API Test page renders test duration', () => {
+	const { getByText } = render(<APITest />);
+	const testElement = getByText(/Duration/i);
+	expect(testElement).toBeInTheDocument();
+});
+
+test('API Test page renders overall test status', () => {
+	const { getByText } = render(<APITest />);
+	const testElement = getByText(/Status/i);
+	expect(testElement).toBeInTheDocument();
+});
+
 // Footer tests
 
 test('Footer renders logo', () => {
