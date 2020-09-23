@@ -212,12 +212,14 @@ const APITest = () => {
 											onChange={(e) => updateID(e.target.value)}
 											placeholder="Copy/paste an _id"
 											style={{ margin: '0 0 10px 0' }}
+											aria-label="id"
 										/>
 										<InputText
 											value={name}
 											onChange={(e) => updateName(e.target.value)}
 											placeholder="Enter a name"
 											style={{ margin: '0 0 10px 0' }}
+											aria-label="name"
 										/>
 										<InputNumber
 											value={cost}
@@ -225,6 +227,7 @@ const APITest = () => {
 											mode="currency"
 											currency="USD"
 											locale="en-US"
+											aria-label="cost"
 										/>
 									</div>
 									<div className="p-col-6 p-sm-3">
@@ -300,6 +303,7 @@ const APITest = () => {
 								autoResize
 								readOnly
 								data-testid="JSON records"
+								aria-label="records"
 							/>
 						</div>
 					</div>

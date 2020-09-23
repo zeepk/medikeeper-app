@@ -56,6 +56,7 @@ const AddItem = (props) => {
 						value={name}
 						onChange={(e) => updateName(e.target.value)}
 						placeholder="Enter a name"
+						aria-label="name"
 					/>
 				</div>
 				<div className="p-field">
@@ -65,9 +66,10 @@ const AddItem = (props) => {
 						mode="currency"
 						currency="USD"
 						locale="en-US"
+						aria-label="cost"
 					/>
 				</div>
-				<Button label="Confirm" type="submit" />
+				<Button label="Confirm" type="submit" aria-label="confirm" />
 			</form>
 		</Card>
 	);

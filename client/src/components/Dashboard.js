@@ -52,6 +52,7 @@ const Dashboard = () => {
 					item.edited = true;
 					updateItems([...items]);
 				}}
+				aria-label="name"
 			/>
 		);
 	};
@@ -69,6 +70,7 @@ const Dashboard = () => {
 				mode="currency"
 				currency="USD"
 				locale="en-US"
+				aria-label="cost"
 			/>
 		);
 	};
@@ -163,6 +165,7 @@ const Dashboard = () => {
 						placeholder="Search the inventory"
 						value={searchString}
 						onChange={(e) => updateSearchString(e.target.value)}
+						aria-label="name"
 					/>
 				</span>
 			</div>

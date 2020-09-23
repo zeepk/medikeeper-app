@@ -27,6 +27,7 @@ const MaxPrices = (props) => {
 						placeholder="Enter a name"
 						value={name}
 						onChange={(e) => updateName(e.target.value)}
+						aria-label="name"
 					/>
 				</div>
 				<div>
@@ -61,6 +62,7 @@ const MaxPrices = (props) => {
 									.catch((err) => console.log(err));
 							}
 						}}
+						aria-label="get max price"
 					/>
 				</div>
 			</div>
