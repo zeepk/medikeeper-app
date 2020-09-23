@@ -8,9 +8,17 @@
 
 [![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]()
 
-[![Home page](https://i.imgur.com/mx3ucWf.png)]()
+[![Home page](https://i.imgur.com/U5QWWxb.png)]()
 
 - Image of the home page
+
+> Search the inventory using the search bar above the table
+
+> Sort by Name or Price by clicking the appropriate column header
+
+> Add an item or check the max price of an item by using the tools on the left
+
+> See all max prices in the chart at the bottom of the page
 
 
 ## Installation
