@@ -15,6 +15,7 @@ const buttonSize = '40px';
 const isMobile =
 	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
 	575;
+
 const Dashboard = () => {
 	const [searchString, updateSearchString] = useState('');
 	const [items, updateItems] = useState([]);
@@ -63,6 +64,7 @@ const Dashboard = () => {
 			/>
 		);
 	};
+
 	const costTemplate = (rowData) => {
 		const item = items.find((item) => item._id === rowData._id);
 		return (
@@ -108,6 +110,7 @@ const Dashboard = () => {
 					});
 				});
 		};
+
 		return (
 			<span style={{ float: 'right' }}>
 				{item.loading ? (
