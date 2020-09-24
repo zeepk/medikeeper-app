@@ -54,6 +54,11 @@ const APITest = () => {
 	const [prices, updatePrices] = useState([]);
 	const [visible, updateVisible] = useState(false);
 	const apiDataRows = 2 + items.length * 10 + (isMobile ? 25 : 0);
+	const clearFields = () => {
+		updateName('');
+		updateID('');
+		updateCost(0);
+	};
 
 	let toast = (
 		<Toast
@@ -100,6 +105,7 @@ const APITest = () => {
 				.catch((err) => console.log(err))
 				.finally(() => {
 					getItems();
+					clearFields();
 				});
 		}
 	};
@@ -130,6 +136,7 @@ const APITest = () => {
 				.then((response) => response.json())
 				.then(() => {
 					getItems();
+					clearFields();
 				});
 		}
 	};
@@ -150,6 +157,7 @@ const APITest = () => {
 				.then((response) => response.json())
 				.then(() => {
 					updateItems([...items.filter((arrayItem) => arrayItem._id !== id)]);
+					clearFields();
 				});
 		}
 	};
@@ -248,7 +256,7 @@ const APITest = () => {
 											className="p-button-success"
 											label="Create"
 											type="submit"
-											style={{ margin: '0 10px 10px 0', width: '100px' }}
+											style={{ margin: '0 10px 10px 0', width: '100%' }}
 											onClick={() => createItem()}
 											aria-label="create"
 										/>
@@ -256,7 +264,7 @@ const APITest = () => {
 										<Button
 											label="Update"
 											type="submit"
-											style={{ margin: '0 10px 10px 0', width: '100px' }}
+											style={{ margin: '0 10px 10px 0', width: '100%' }}
 											onClick={() => updateItem()}
 											aria-label="update"
 										/>
@@ -264,7 +272,7 @@ const APITest = () => {
 											className="p-button-danger"
 											label="Delete"
 											type="submit"
-											style={{ width: '100px' }}
+											style={{ width: '100%' }}
 											onClick={() => deleteItem()}
 											aria-label="delete"
 										/>
