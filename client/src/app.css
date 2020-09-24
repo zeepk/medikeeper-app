@@ -27,7 +27,8 @@ td {
 	background: #6e7073 !important;
 }
 .p-lg-4,
-.p-md-4 {
+.p-md-4,
+.p-md-5 {
 	padding: 0.5rem !important;
 }
 a:hover {

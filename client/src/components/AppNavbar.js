@@ -18,7 +18,7 @@ const AppNavbar = () => {
 			<Dialog
 				header="Help"
 				visible={visible}
-				style={{ maxWidth: '90vw', width: '400px' }}
+				style={{ maxWidth: '90vw', width: '700px' }}
 				onHide={() => updateVisible(false)}
 			>
 				<HelpModal />
