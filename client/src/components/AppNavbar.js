@@ -42,7 +42,7 @@ const AppNavbar = () => {
 					id="basic-navbar-nav"
 					style={{ margin: `${isMobile ? 2 : 0}vh 0` }}
 				>
-					<Nav className="mr-auto ml-3">
+					<Nav className="mr-auto ml-3 mb-0">
 						<Link to="/apitest" rel="preload">
 							<span
 								style={{
@@ -56,7 +56,7 @@ const AppNavbar = () => {
 							</span>
 						</Link>
 					</Nav>
-					<Nav className={`ml-${isMobile ? '3' : 'auto'} mr-3`}>
+					<Nav className={`ml-${isMobile ? '3 mt-2' : 'auto'} mr-3`}>
 						<Link onClick={() => updateVisible(true)}>
 							<span
 								style={{
