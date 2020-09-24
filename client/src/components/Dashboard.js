@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import MaxPrices from './MaxPrices';
 import AddItem from './AddItem';
+import MaxPrices from './MaxPrices';
 import PriceChart from './PriceChart';
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
@@ -202,14 +202,14 @@ const Dashboard = () => {
 					}}
 				>
 					<div
-						className="p-col-12 p-sm-2 p-md-2 p-lg-2"
+						className="p-col-12 p-sm-12 p-md-4 p-lg-2"
 						style={{ order: isMobile ? 2 : 1 }}
 					>
 						<AddItem refreshItems={getItems} />
 						<MaxPrices data={items} />
 					</div>
 					<div
-						className="p-col-12 p-sm-8 p-md-8 p-lg-8"
+						className="p-col-12 p-sm-12 p-md-8 p-lg-8"
 						style={{ order: isMobile ? 1 : 2 }}
 					>
 						<Card
@@ -253,7 +253,7 @@ const Dashboard = () => {
 						</Card>
 					</div>
 
-					<div className="p-col-12 p-sm-2 p-md-2 p-lg-2" style={{ order: 3 }}>
+					<div className="p-col-12 p-sm-12 p-md-12 p-lg-2" style={{ order: 3 }}>
 						<PriceChart data={maxPrices} />
 					</div>
 				</div>

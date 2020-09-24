@@ -39,7 +39,6 @@ const PriceChart = (props) => {
 		labels: Object.keys(props.data),
 		datasets: [
 			{
-				// label: 'My First dataset',
 				backgroundColor: '#81c784',
 				data: Object.values(props.data),
 			},
@@ -58,7 +57,6 @@ const PriceChart = (props) => {
 			title="Max Prices"
 		>
 			<Chart
-				// type="horizontalBar"
 				type="horizontalBar"
 				data={chartData}
 				options={chartOptions}

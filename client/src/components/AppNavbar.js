@@ -10,7 +10,7 @@ const isMobile =
 const AppNavbar = () => {
 	return (
 		<div>
-			<Navbar bg="dark" expand="sm">
+			<Navbar bg="dark" variant="dark" expand="sm">
 				<Link to="/" style={{ margin: '0 7rem 0 0' }}>
 					<img alt="logo" src={Logo} height="40" className="p-mr-2"></img>
 					<span

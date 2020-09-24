@@ -53,6 +53,7 @@ const APITest = () => {
 	const [cost, updateCost] = useState(0);
 	const [prices, updatePrices] = useState([]);
 	const [visible, updateVisible] = useState(false);
+	const apiDataRows = 2 + items.length * 10 + (isMobile ? 25 : 0);
 
 	let toast = (
 		<Toast
@@ -247,7 +248,7 @@ const APITest = () => {
 											className="p-button-success"
 											label="Create"
 											type="submit"
-											style={{ margin: '0 0 10px 0', width: '100px' }}
+											style={{ margin: '0 10px 10px 0', width: '100px' }}
 											onClick={() => createItem()}
 											aria-label="create"
 										/>
@@ -255,7 +256,7 @@ const APITest = () => {
 										<Button
 											label="Update"
 											type="submit"
-											style={{ margin: '0 0 10px 0', width: '100px' }}
+											style={{ margin: '0 10px 10px 0', width: '100px' }}
 											onClick={() => updateItem()}
 											aria-label="update"
 										/>
@@ -310,7 +311,7 @@ const APITest = () => {
 							}}
 						>
 							<InputTextarea
-								rows={2 + items.length * 10}
+								rows={apiDataRows}
 								cols={20}
 								value={JSON.stringify(items, undefined, 4)}
 								autoResize
