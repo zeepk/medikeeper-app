@@ -72,7 +72,6 @@ const MaxPrices = (props) => {
 									.then((res) => {
 										updatePrice(res);
 										updateVisible(true);
-										updateName('');
 									})
 									.catch((err) => console.log(err));
 							}

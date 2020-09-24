@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Logo from '../assets/images/logo.png';
-import AddItemImage from '../assets/images/addItem.png';
+import HelpModal from './HelpModal';
+import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
 const isMobile =
@@ -22,12 +21,7 @@ const AppNavbar = () => {
 				style={{ maxWidth: '90vw', width: '400px' }}
 				onHide={() => updateVisible(false)}
 			>
-				<div style={{ textAlign: 'center' }}>
-					<img src={AddItemImage} alt="Add Item" />
-					<p>
-						Use the Add Item panel to append a new item to the inventory list.
-					</p>
-				</div>
+				<HelpModal />
 			</Dialog>
 			<Navbar bg="dark" variant="dark" expand="sm">
 				<Link to="/" style={{ margin: '0 7rem 0 0' }} rel="preload">
@@ -62,18 +56,19 @@ const AppNavbar = () => {
 							</span>
 						</Link>
 					</Nav>
-					<Nav className="ml-auto mr-3">
-						<Button
-							style={{
-								fontSize: '1rem',
-								color: 'white',
-								margin: `${isMobile ? 2 : 0}vh 0 ${isMobile ? 2 : 0}vh 3vw`,
-								width: '100px',
-							}}
-							label="Help"
-							className="p-button-outlined p-button-secondary"
-							onClick={() => updateVisible(true)}
-						/>
+					<Nav className={`ml-${isMobile ? '3' : 'auto'} mr-3`}>
+						<Link onClick={() => updateVisible(true)}>
+							<span
+								style={{
+									fontSize: '1.2rem',
+									color: 'white',
+									margin: '50px 0',
+								}}
+							>
+								<i className="pi pi-question-circle p-mr-2"></i>
+								Help
+							</span>
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
