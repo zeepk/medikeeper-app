@@ -4,6 +4,7 @@ import { Chart } from 'primereact/chart';
 
 const PriceChart = (props) => {
 	const chartOptions = {
+		maintainAspectRatio: false,
 		legend: {
 			display: false,
 		},
@@ -15,6 +16,8 @@ const PriceChart = (props) => {
 					},
 					ticks: {
 						fontColor: 'var(--font-color)',
+						suggestedMin: 0,
+						beginAtZero: true,
 					},
 				},
 			],
@@ -25,6 +28,8 @@ const PriceChart = (props) => {
 					},
 					ticks: {
 						fontColor: 'var(--font-color)',
+						suggestedMin: 0,
+						beginAtZero: true,
 					},
 				},
 			],
@@ -44,9 +49,9 @@ const PriceChart = (props) => {
 		<Card
 			style={{
 				borderRadius: '10px',
-				width: '800px',
-				maxWidth: '95vw',
-				margin: '0 auto 80vh auto',
+				width: '100%',
+				maxWidth: '90vw',
+				margin: '0 auto',
 				backgroundColor: 'var(--card-color)',
 				border: 'var(--card-border)',
 			}}
@@ -54,9 +59,10 @@ const PriceChart = (props) => {
 		>
 			<Chart
 				// type="horizontalBar"
-				type={props.vw <= 575 ? 'horizontalBar' : 'bar'}
+				type="horizontalBar"
 				data={chartData}
 				options={chartOptions}
+				style={{ height: '500px' }}
 			/>
 		</Card>
 	);

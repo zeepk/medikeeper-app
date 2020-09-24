@@ -26,3 +26,13 @@ td {
 .p-menuitem-link:hover {
 	background: #6e7073 !important;
 }
+.p-lg-4,
+.p-md-4 {
+	padding: 0.5rem !important;
+}
+a:hover {
+	text-decoration: none !important;
+}
+.p-card-body {
+	padding: 0.5rem 1rem !important;
+}

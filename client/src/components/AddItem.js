@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
+import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
@@ -8,6 +9,7 @@ import { InputNumber } from 'primereact/inputnumber';
 const AddItem = (props) => {
 	const [name, updateName] = useState('');
 	const [cost, updateCost] = useState(0);
+	const [visible, updateVisible] = useState(false);
 	let toast;
 
 	return (
@@ -22,33 +24,52 @@ const AddItem = (props) => {
 				border: 'var(--card-border)',
 			}}
 		>
-			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
+			<Dialog
+				header="Item Added"
+				visible={visible}
+				style={{ maxWidth: '90vw', width: '400px' }}
+				onHide={() => updateVisible(false)}
+			>
+				{`Successfully added ${name} for $${cost}`}
+			</Dialog>
+			<Toast
+				style={{ maxWidth: '90vw', width: '300px', left: 'calc(50% - 150px)' }}
+				ref={(el) => (toast = el)}
+			/>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
-					fetch('/api/items', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify({
-							name,
-							cost,
-						}),
-					})
-						.then((response) => {
-							response.json();
-						})
-						.catch((err) => console.log(err))
-						.finally(() => {
-							toast.show({
-								severity: 'success',
-								summary: `Successfully added a ${name} for $${cost}`,
-							});
-							updateName('');
-							updateCost(0);
-							props.refreshItems();
+					if (!name) {
+						toast.show({
+							severity: 'error',
+							summary: 'Please enter a Name',
 						});
+					} else {
+						fetch('/api/items', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({
+								name,
+								cost,
+							}),
+						})
+							.then((response) => {
+								response.json();
+							})
+							.catch((err) => console.log(err))
+							.finally(() => {
+								toast.show({
+									severity: 'success',
+									summary: `Successfully added a ${name} for $${cost}`,
+								});
+								// updateVisible(true);
+								updateName('');
+								updateCost(0);
+								props.refreshItems();
+							});
+					}
 				}}
 			>
 				<div className="p-field">

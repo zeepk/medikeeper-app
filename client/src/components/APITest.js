@@ -10,8 +10,11 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { ProgressSpinner } from 'primereact/progressspinner';
-const data = require('../test_output.json');
-const testDate = new Date(data.startTime);
+const isMobile =
+	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
+	575;
+const test_data = require('../test_output.json');
+const testDate = new Date(test_data.startTime);
 const testResultIcon = (result, size) => {
 	if (result === 'passed') {
 		return (
@@ -49,10 +52,14 @@ const APITest = () => {
 	const [name, updateName] = useState('');
 	const [cost, updateCost] = useState(0);
 	const [prices, updatePrices] = useState([]);
-
 	const [visible, updateVisible] = useState(false);
 
-	let toast = <Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />;
+	let toast = (
+		<Toast
+			style={{ maxWidth: '90vw', width: '300px', left: 'calc(50% - 150px)' }}
+			ref={(el) => (toast = el)}
+		/>
+	);
 
 	const getItems = () => {
 		updateLoading(true);
@@ -173,16 +180,17 @@ const APITest = () => {
 						postition: 'absolute',
 						left: '35vw',
 						top: '20vh',
+						margin: '0 0 80vh 0',
 					}}
 				/>
 			) : (
 				<div>
 					<p
 						style={{
-							margin: '2vh 5vw',
+							margin: '1vh 10vw',
 							textAlign: 'left',
 							fontWeight: 'bold',
-							fontSize: '4rem',
+							fontSize: '3rem',
 							color: 'white',
 						}}
 					>
@@ -190,7 +198,11 @@ const APITest = () => {
 					</p>
 					<div
 						className="p-grid"
-						style={{ margin: '0 auto', padding: '5vh 5vw', maxWidth: '1200px' }}
+						style={{
+							margin: '0 auto',
+							padding: '0 5vw',
+							maxWidth: '1200px',
+						}}
 					>
 						<div className="p-col-12 p-md-4">
 							<Card
@@ -198,7 +210,7 @@ const APITest = () => {
 									borderRadius: '10px',
 									backgroundColor: 'var(--card-color)',
 									border: 'var(--card-border)',
-									margin: '0 0 5vh 0',
+									margin: '0 0 2vh 0',
 								}}
 								title="CRUD Data"
 							>
@@ -206,7 +218,7 @@ const APITest = () => {
 									className="p-grid"
 									style={{ maxWidth: '700px', margin: 0 }}
 								>
-									<div className="p-col-12 p-sm-8">
+									<div className="p-col-12 p-lg-8">
 										<InputText
 											value={id}
 											onChange={(e) => updateID(e.target.value)}
@@ -230,28 +242,28 @@ const APITest = () => {
 											aria-label="cost"
 										/>
 									</div>
-									<div className="p-col-6 p-sm-3">
+									<div className="p-col-6 p-lg-4">
 										<Button
-											className="p-button-rounded p-button-success"
+											className="p-button-success"
 											label="Create"
 											type="submit"
-											style={{ margin: '0 0 10px 0' }}
+											style={{ margin: '0 0 10px 0', width: '100px' }}
 											onClick={() => createItem()}
 											aria-label="create"
 										/>
 
 										<Button
-											className="p-button-rounded"
 											label="Update"
 											type="submit"
-											style={{ margin: '0 0 10px 0' }}
+											style={{ margin: '0 0 10px 0', width: '100px' }}
 											onClick={() => updateItem()}
 											aria-label="update"
 										/>
 										<Button
-											className="p-button-rounded p-button-danger"
+											className="p-button-danger"
 											label="Delete"
 											type="submit"
+											style={{ width: '100px' }}
 											onClick={() => deleteItem()}
 											aria-label="delete"
 										/>
@@ -265,7 +277,7 @@ const APITest = () => {
 									borderRadius: '10px',
 									backgroundColor: 'var(--card-color)',
 									border: 'var(--card-border)',
-									margin: '5vh 0 5vh 0',
+									margin: '2vh 0',
 								}}
 								title="Show Max Prices"
 							>
@@ -292,8 +304,9 @@ const APITest = () => {
 						<div
 							className="p-col-12 p-md-8"
 							style={{
-								maxHeight: '75vh',
+								maxHeight: '65vh',
 								overflow: 'auto',
+								margin: '0 0 5vh 0',
 							}}
 						>
 							<InputTextarea
@@ -307,89 +320,100 @@ const APITest = () => {
 							/>
 						</div>
 					</div>
+					<div
+						style={{
+							backgroundColor: '#9DC7C8',
+							padding: `0 0 ${isMobile ? 90 : 40}vh 0`,
+						}}
+					>
+						<p
+							style={{
+								margin: '1vh 10vw',
+								textAlign: 'left',
+								fontWeight: 'bold',
+								fontSize: '3rem',
+								color: 'black',
+								// padding: '5vh 0',
+							}}
+						>
+							Tests
+						</p>
+						<div style={{ margin: '0 auto', maxWidth: '1200px' }}>
+							<div
+								className="p-grid p-dir-rev"
+								style={{ margin: 0, padding: '5vh 5vw' }}
+							>
+								<div className="p-col-12 p-md-3">
+									<Card
+										title="Duration"
+										style={{
+											textAlign: 'center',
+											borderRadius: '10px',
+											backgroundColor: 'var(--card-color)',
+											border: 'var(--card-border)',
+											margin: '0 0 2vh 0',
+										}}
+									>
+										<p style={{ fontSize: '5rem', margin: 0 }}>{`${
+											Math.round(
+												((test_data.testResults[0].endTime -
+													test_data.testResults[0].startTime) /
+													1000) *
+													10
+											) / 10
+										}s`}</p>
+									</Card>
+									<Card
+										title="Status"
+										style={{
+											textAlign: 'center',
+											borderRadius: '10px',
+											backgroundColor: 'var(--card-color)',
+											border: 'var(--card-border)',
+											margin: '0 0 5vh 0',
+										}}
+									>
+										{testResultIcon(test_data.testResults[0].status, '6rem')}
+									</Card>
+								</div>
+								<div className="p-col-12 p-md-9">
+									<Card
+										style={{
+											borderRadius: '10px',
+											backgroundColor: 'var(--card-color)',
+											border: 'var(--card-border)',
+											margin: '0 auto',
+											width: '90vw',
+											maxWidth: '100%',
+										}}
+										title={`Test Results for ${testDate.toLocaleString()}`}
+									>
+										<DataTable
+											className="p-datatable-striped"
+											value={test_data.testResults[0].assertionResults}
+											paginator
+											paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+											currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+											rows={5}
+											rowsPerPageOptions={[5, 10, 20, 50]}
+										>
+											<Column field="title" header="Test" />
+											<Column
+												style={{ textAlign: 'right' }}
+												field="passed"
+												header="Result"
+												body={(rowData) =>
+													testResultIcon(rowData.status, '1rem')
+												}
+											/>
+										</DataTable>
+									</Card>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			)}
-			<p
-				style={{
-					margin: '5vh 5vw',
-					textAlign: 'left',
-					fontWeight: 'bold',
-					fontSize: '4rem',
-					color: 'white',
-				}}
-			>
-				Tests
-			</p>
-			<div style={{ margin: '0 auto 80vh auto', maxWidth: '1200px' }}>
-				<div
-					className="p-grid p-dir-rev"
-					style={{ margin: 0, padding: '5vh 5vw' }}
-				>
-					<div className="p-col-12 p-md-3">
-						<Card
-							title="Duration"
-							style={{
-								textAlign: 'center',
-								borderRadius: '10px',
-								backgroundColor: 'var(--card-color)',
-								border: 'var(--card-border)',
-								margin: '0 0 5vh 0',
-							}}
-						>
-							<p style={{ fontSize: '5rem', margin: 0 }}>{`${
-								Math.round(
-									((data.testResults[0].endTime -
-										data.testResults[0].startTime) /
-										1000) *
-										10
-								) / 10
-							}s`}</p>
-						</Card>
-						<Card
-							title="Status"
-							style={{
-								textAlign: 'center',
-								borderRadius: '10px',
-								backgroundColor: 'var(--card-color)',
-								border: 'var(--card-border)',
-							}}
-						>
-							{testResultIcon(data.testResults[0].status, '6rem')}
-						</Card>
-					</div>
-					<div className="p-col-12 p-md-9">
-						<Card
-							style={{
-								borderRadius: '10px',
-								backgroundColor: 'var(--card-color)',
-								border: 'var(--card-border)',
-								margin: '0 auto',
-								width: '90vw',
-								maxWidth: '100%',
-							}}
-							title={`Test Results for ${testDate.toLocaleString()}`}
-						>
-							<DataTable
-								className="p-datatable-striped"
-								value={data.testResults[0].assertionResults}
-								paginator
-								paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-								currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-								rows={10}
-								rowsPerPageOptions={[10, 20, 50]}
-							>
-								<Column field="title" header="Test" />
-								<Column
-									style={{ textAlign: 'right' }}
-									field="passed"
-									header="Result"
-									body={(rowData) => testResultIcon(rowData.status, '1rem')}
-								/>
-							</DataTable>
-						</Card>
-					</div>
-				</div>
-			</div>
 		</div>
 	);
 };

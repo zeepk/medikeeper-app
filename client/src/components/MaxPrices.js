@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { Card } from 'primereact/card';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 
 const MaxPrices = (props) => {
 	const [name, updateName] = useState('');
-	const items = props.data;
+	const [price, updatePrice] = useState(0);
+	const [visible, updateVisible] = useState(false);
 	let toast;
+
+	const items = props.data;
 	return (
 		<Card
 			style={{
@@ -19,8 +23,21 @@ const MaxPrices = (props) => {
 			}}
 			title="Max Item Price"
 		>
-			<Toast style={{ maxWidth: '90vw' }} ref={(el) => (toast = el)} />
-
+			<Dialog
+				header="Maximum Price"
+				visible={visible}
+				style={{ maxWidth: '90vw', width: '400px' }}
+				onHide={() => {
+					updateVisible(false);
+					updateName('');
+				}}
+			>
+				{`$${price} is the maximum price for ${name}.`}
+			</Dialog>
+			<Toast
+				style={{ maxWidth: '90vw', width: '300px', left: 'calc(50% - 150px)' }}
+				ref={(el) => (toast = el)}
+			/>
 			<div style={{ maxWidth: '700px', margin: 0 }}>
 				<div>
 					<InputText
@@ -52,13 +69,10 @@ const MaxPrices = (props) => {
 							} else {
 								fetch(`/api/items/maxitemprice/${name}`)
 									.then((response) => response.json())
-									.then((res) =>
-										toast.show({
-											severity: 'info',
-											summary: 'Max Price',
-											detail: `$${res} is the maximum price for ${name}`,
-										})
-									)
+									.then((res) => {
+										updatePrice(res);
+										updateVisible(true);
+									})
 									.catch((err) => console.log(err));
 							}
 						}}

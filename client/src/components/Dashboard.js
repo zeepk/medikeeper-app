@@ -3,6 +3,7 @@ import MaxPrices from './MaxPrices';
 import AddItem from './AddItem';
 import PriceChart from './PriceChart';
 import { Card } from 'primereact/card';
+import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -11,15 +12,21 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 const buttonSize = '40px';
-const viewWidth = Math.max(
-	document.documentElement.clientWidth || 0,
-	window.innerWidth || 0
-);
+const isMobile =
+	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
+	575;
 const Dashboard = () => {
 	const [searchString, updateSearchString] = useState('');
 	const [items, updateItems] = useState([]);
 	const [maxPrices, updateMaxPrices] = useState([]);
 	const [loading, updateLoading] = useState(true);
+
+	let toast = (
+		<Toast
+			style={{ maxWidth: '90vw', width: '300px', left: 'calc(50% - 150px)' }}
+			ref={(el) => (toast = el)}
+		/>
+	);
 
 	const getItems = () => {
 		updateLoading(true);
@@ -77,7 +84,7 @@ const Dashboard = () => {
 
 	const actionsTemplate = (rowData) => {
 		const item = items.find((item) => item._id === rowData._id);
-		item.save = () => {
+		item.save = (toast) => {
 			item.loading = true;
 			updateItems([...items]);
 			fetch(`/api/items/${item._id}`, {
@@ -95,6 +102,10 @@ const Dashboard = () => {
 					item.loading = false;
 					item.edited = false;
 					updateItems([...items]);
+					toast.show({
+						severity: 'success',
+						summary: 'Item updated',
+					});
 				});
 		};
 		return (
@@ -112,7 +123,7 @@ const Dashboard = () => {
 					<Button
 						icon="pi pi-save"
 						className="p-button-rounded"
-						onClick={() => item.save()}
+						onClick={() => item.save(toast)}
 						style={{
 							height: buttonSize,
 							width: buttonSize,
@@ -140,9 +151,7 @@ const Dashboard = () => {
 							.then((response) => response.json())
 							.then(() => {
 								item.edited = false;
-								updateItems([
-									...items.filter((arrayItem) => arrayItem._id !== item._id),
-								]);
+								getItems();
 							});
 					}}
 					style={{
@@ -158,6 +167,7 @@ const Dashboard = () => {
 
 	return (
 		<div>
+			{toast}
 			<div style={{ width: '700px', maxWidth: '90vw', margin: '2vh auto' }}>
 				<span className="p-input-icon-left" style={{ width: '100%' }}>
 					<i className="pi pi-search" />
@@ -169,29 +179,39 @@ const Dashboard = () => {
 					/>
 				</span>
 			</div>
-			<div
-				className="p-grid p-dir-rev"
-				style={{
-					padding: '0 0 5vh 0',
-					margin: '0 auto',
-					maxWidth: '95vw',
-					width: '1500px',
-				}}
-			>
-				<div className="p-col-12 p-sm-2 p-md-2 p-lg-2"></div>
-				<div className="p-col-12 p-sm-8 p-md-8 p-lg-8">
-					{loading ? (
-						<ProgressSpinner
-							strokeWidth={'2'}
-							style={{
-								height: '20vw',
-								width: '20vw',
-								postition: 'absolute',
-								left: '35vw',
-								top: '20vh',
-							}}
-						/>
-					) : (
+			{loading ? (
+				<ProgressSpinner
+					strokeWidth={'2'}
+					style={{
+						height: '20vw',
+						width: '20vw',
+						postition: 'absolute',
+						left: '35vw',
+						top: '20vh',
+						margin: '0 0 80vh 0',
+					}}
+				/>
+			) : (
+				<div
+					className="p-grid"
+					style={{
+						padding: '0 0 5vh 0',
+						margin: `0 auto ${isMobile ? 80 : 40}vh auto`,
+						maxWidth: '95vw',
+						width: '1500px',
+					}}
+				>
+					<div
+						className="p-col-12 p-sm-2 p-md-2 p-lg-2"
+						style={{ order: isMobile ? 2 : 1 }}
+					>
+						<AddItem refreshItems={getItems} />
+						<MaxPrices data={items} />
+					</div>
+					<div
+						className="p-col-12 p-sm-8 p-md-8 p-lg-8"
+						style={{ order: isMobile ? 1 : 2 }}
+					>
 						<Card
 							style={{
 								backgroundColor: 'var(--card-color)',
@@ -222,7 +242,7 @@ const Dashboard = () => {
 									field="cost"
 									sortable
 									body={costTemplate}
-									style={{ width: '45%', maxWidth: '300px' }}
+									style={{ width: '50%', maxWidth: '300px' }}
 								/>
 								<Column
 									header=""
@@ -231,14 +251,13 @@ const Dashboard = () => {
 								/>
 							</DataTable>
 						</Card>
-					)}
+					</div>
+
+					<div className="p-col-12 p-sm-2 p-md-2 p-lg-2" style={{ order: 3 }}>
+						<PriceChart data={maxPrices} />
+					</div>
 				</div>
-				<div className="p-col-12 p-sm-2 p-md-2 p-lg-2">
-					<AddItem refreshItems={getItems} />
-					<MaxPrices data={items} />
-				</div>
-			</div>
-			<PriceChart vw={viewWidth} data={maxPrices} />
+			)}
 		</div>
 	);
 };

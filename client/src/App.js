@@ -1,11 +1,9 @@
 import React from 'react';
-import Navbar from './components/Navbar';
 import AppRouter from './components/AppRouter';
-import Footer from './components/Footer';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-// import 'primereact/resources/themes/arya-green/theme.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import './app.css';
 function App() {
@@ -19,9 +17,7 @@ function App() {
 				paddingBottom: '10vh',
 			}}
 		>
-			<Navbar />
 			<AppRouter />
-			<Footer />
 		</div>
 	);
 }
