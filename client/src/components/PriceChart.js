@@ -4,6 +4,13 @@ import { Chart } from 'primereact/chart';
 
 const PriceChart = (props) => {
 	const chartOptions = {
+		tooltips: {
+			callbacks: {
+				label: function (item) {
+					return '$' + item.value.toString();
+				},
+			},
+		},
 		maintainAspectRatio: false,
 		legend: {
 			display: false,
@@ -18,6 +25,9 @@ const PriceChart = (props) => {
 						fontColor: 'var(--font-color)',
 						suggestedMin: 0,
 						beginAtZero: true,
+						callback: function (value) {
+							return '$' + value;
+						},
 					},
 				},
 			],
