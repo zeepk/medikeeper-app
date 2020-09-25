@@ -78,7 +78,7 @@ const Footer = () => {
 				textAlign: 'center',
 				backgroundColor: 'BLACK',
 				margin: 0,
-				padding: '0 20vw 2vh 20vw',
+				padding: '0 10% 2vh 10%',
 				fontSize: '.9rem',
 				position: 'absolute',
 				bottom: 0,
@@ -89,7 +89,7 @@ const Footer = () => {
 				<img
 					alt="logo"
 					src={Logo}
-					style={{ width: '50%', display: 'block', margin: '0 auto' }}
+					style={{ width: '30%', display: 'block', margin: '0 auto' }}
 				></img>
 			</div>
 			{links.map((footerItem) => (

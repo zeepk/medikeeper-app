@@ -10,9 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { ProgressSpinner } from 'primereact/progressspinner';
-const isMobile =
-	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
-	575;
+
 const test_data = require('../test_output.json');
 const testDate = new Date(test_data.startTime);
 const testResultIcon = (result, size) => {
@@ -53,6 +51,20 @@ const APITest = () => {
 	const [cost, updateCost] = useState(0);
 	const [prices, updatePrices] = useState([]);
 	const [visible, updateVisible] = useState(false);
+	const [isMobile, updateIsMobile] = useState(
+		Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0
+		) <= 767
+	);
+	window.addEventListener('resize', () => {
+		const mobileSize =
+			Math.max(
+				document.documentElement.clientWidth || 0,
+				window.innerWidth || 0
+			) <= 767;
+		mobileSize !== isMobile && updateIsMobile(!isMobile);
+	});
 	const apiDataRows = 2 + items.length * 10 + (isMobile ? 25 : 0);
 	const clearFields = () => {
 		updateName('');
@@ -320,7 +332,7 @@ const APITest = () => {
 						>
 							<InputTextarea
 								rows={apiDataRows}
-								cols={20}
+								cols={100}
 								value={JSON.stringify(items, undefined, 4)}
 								autoResize
 								readOnly

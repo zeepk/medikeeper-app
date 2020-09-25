@@ -12,15 +12,26 @@ import { InputNumber } from 'primereact/inputnumber';
 import { ProgressSpinner } from 'primereact/progressspinner';
 
 const buttonSize = '40px';
-const isMobile =
-	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
-	575;
 
 const Dashboard = () => {
 	const [searchString, updateSearchString] = useState('');
 	const [items, updateItems] = useState([]);
 	const [maxPrices, updateMaxPrices] = useState([]);
 	const [loading, updateLoading] = useState(true);
+	const [isMobile, updateIsMobile] = useState(
+		Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0
+		) <= 767
+	);
+	window.addEventListener('resize', () => {
+		const mobileSize =
+			Math.max(
+				document.documentElement.clientWidth || 0,
+				window.innerWidth || 0
+			) <= 767;
+		mobileSize !== isMobile && updateIsMobile(!isMobile);
+	});
 
 	let toast = (
 		<Toast

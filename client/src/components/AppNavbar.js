@@ -6,12 +6,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Dialog } from 'primereact/dialog';
 
-const isMobile =
-	Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <=
-	575;
-
 const AppNavbar = () => {
 	const [visible, updateVisible] = useState(false);
+	const [isMobile, updateIsMobile] = useState(
+		Math.max(
+			document.documentElement.clientWidth || 0,
+			window.innerWidth || 0
+		) <= 575
+	);
+	window.addEventListener('resize', () => {
+		const mobileSize =
+			Math.max(
+				document.documentElement.clientWidth || 0,
+				window.innerWidth || 0
+			) <= 575;
+		mobileSize !== isMobile && updateIsMobile(!isMobile);
+	});
 
 	return (
 		<div>
@@ -23,8 +33,12 @@ const AppNavbar = () => {
 			>
 				<HelpModal />
 			</Dialog>
-			<Navbar bg="dark" variant="dark" expand="sm">
-				<Link to="/" style={{ margin: '0 7rem 0 0' }} rel="preload">
+			<Navbar bg="dark" variant="dark" expand="sm" style={{ padding: 0 }}>
+				<Link
+					to="/"
+					style={{ margin: '0 7rem 0 0', padding: '10px' }}
+					rel="preload"
+				>
 					<img alt="logo" src={Logo} height="40" className="p-mr-2"></img>
 					<span
 						style={{
@@ -37,10 +51,17 @@ const AppNavbar = () => {
 						MediApp
 					</span>
 				</Link>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Toggle
+					aria-controls="basic-navbar-nav"
+					style={{ margin: '10px' }}
+				/>
 				<Navbar.Collapse
 					id="basic-navbar-nav"
-					style={{ margin: `${isMobile ? 2 : 0}vh 0` }}
+					style={
+						isMobile
+							? { padding: '2vh 0', width: '100vw', backgroundColor: '#4b5259' }
+							: { margin: 0 }
+					}
 				>
 					<Nav className="mr-auto ml-3 mb-0">
 						<Link to="/apitest" rel="preload">
