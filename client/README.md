@@ -8,7 +8,7 @@
 
 [![Heroku](https://heroku-badges.herokuapp.com/?app=medikeeper-app)]()
 
-[![Home page](https://i.imgur.com/U5QWWxb.png)]()
+[![Home page](https://i.imgur.com/Wj4cb1V.png)]()
 
 - Image of the home page
 
