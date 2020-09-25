@@ -4,6 +4,9 @@ import { Chart } from 'primereact/chart';
 
 const PriceChart = (props) => {
 	const chartOptions = {
+		animation: {
+			duration: 0,
+		},
 		tooltips: {
 			callbacks: {
 				label: function (item) {

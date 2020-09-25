@@ -119,6 +119,7 @@ const Dashboard = () => {
 						severity: 'success',
 						summary: 'Item updated',
 					});
+					getItems();
 				});
 		};
 
@@ -212,7 +213,7 @@ const Dashboard = () => {
 						padding: '0 0 5vh 0',
 						margin: `0 auto ${isMobile ? 80 : 40}vh auto`,
 						maxWidth: '95vw',
-						width: '1500px',
+						width: '95vw',
 					}}
 				>
 					<div
